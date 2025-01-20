@@ -1,56 +1,58 @@
- /*Calculator Body*/
-.calc-body {
-    width: 275px;
-    margin: auto;
-    min-height: 400px;
-    box-shadow: 0 8px 50px -7px black;
-    background: #fafafa;
+ *, *::before, *::after {
+  box-sizing: border-box;
+  font-family: Gotham Rounded, sans-serif;
+  font-weight: normal;
 }
-/*Calculator Display Screen*/
-.calc-screen {
-    padding: 1rem;
+
+body {
+  padding: 0;
+  margin: 0;
+  background: linear-gradient(to right, #00AAFF, #00FF6C);
 }
-#calc-operation {
-    font-size: 1.3rem;
-    text-align: right;
-    color: #15181c;
-    padding-bottom: .5rem;
+
+.calculator-grid {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  min-height: 100vh;
+  grid-template-columns: repeat(4, 100px);
+  grid-template-rows: minmax(120px, auto) repeat(5, 100px);
 }
-#calc-typed {
-    font-size: 2rem;
-    text-align: right;
-    color: #1f1d1d;
+
+.calculator-grid > button {
+  cursor: pointer;
+  font-size: 2rem;
+  border: 1px solid white;
+  outline: none;
+  background-color: rgba(255, 255, 255, .75);
 }
-/*Calculator Buttons*/
-.calc-button-row{
-    display: table;
+
+.calculator-grid > button:hover {
+  background-color: rgba(255, 255, 255, .9);
 }
-.calc-button-row button {
-    display: table-cell;
-    width: 25%;
-    background: #edf5ff;
-    color: #fff;
-    height: 65px;
-    font-size: 1.3rem;
-    border: none;
-    border-color:#3C4857;
-    border-width: 1px 1px 0px 0;
-    border-style: solid;
+
+.span-two {
+  grid-column: span 2;
 }
-.calc-button-row button.ac {
-    color: #2be3f0;
+
+.output {
+  grid-column: 1 / -1;
+  background-color: rgba(0, 0, 0, .75);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  flex-direction: column;
+  padding: 10px;
+  word-wrap: break-word;
+  word-break: break-all;
 }
-.calc-button-row button.opt {
-    color: #2be3f0;
+
+.output .previous-operand {
+  color: rgba(255, 255, 255, .75);
+  font-size: 1.5rem;
 }
-/*The border has been managed in every fourth button so that the design will not distract.*/
-.calc-button-row button:nth-child(4n){
-    border-right: none;
-}
-.calc-button-row button:active {
-    position: relative;
-    top: 1px;
-}
-.calc-button-row button:hover {
-    background: #e4eaf2;
+
+.output .current-operand {
+  color: white;
+  font-size: 2.5rem;
 }
