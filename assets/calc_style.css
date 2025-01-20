@@ -3,7 +3,7 @@ body {
     top: 15%;
     left: 40%;
     margin: 0 auto;
-    background-color: white;
+    background-color: black;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -36,7 +36,7 @@ h1 {
     border: 2px solid #e68a00;
     color: white;
     border-radius: 15px;
-    background-color: white;
+    background-color: black;
 }
 
 #last_operation_history {
@@ -45,7 +45,7 @@ h1 {
     text-align:right;
     padding-right: 1.5vh;
     color: rgb(177, 176, 176);
-    background-color: white;
+    background-color: black;
 }
 
 button {
@@ -53,7 +53,7 @@ button {
     height: 9vh;
     font-weight:bold;
     font-size: 3vh;
-    color: black;
+    color: white;
     background-color: #666666;
     border-radius: 50%;
     border: 1px solid #333333;
