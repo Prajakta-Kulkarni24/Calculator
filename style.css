@@ -1,54 +1,56 @@
- /* Import Google font - Poppins */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+ /*Calculator Body*/
+.calc-body {
+    width: 275px;
+    margin: auto;
+    min-height: 400px;
+    box-shadow: 0 8px 50px -7px black;
+    background: #fafafa;
 }
-body {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #6dcaf2;
+/*Calculator Display Screen*/
+.calc-screen {
+    padding: 1rem;
 }
-.container {
-  position: relative;
-  max-width: 300px;
-  width: 100%;
-  border-radius: 12px;
-  padding: 10px 20px 20px;
-  background: #fff;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+#calc-operation {
+    font-size: 1.3rem;
+    text-align: right;
+    color: #15181c;
+    padding-bottom: .5rem;
 }
-.display {
-  height: 80px;
-  width: 100%;
-  outline: none;
-  border: none;
-  text-align: right;
-  margin-bottom: 10px;
-  font-size: 25px;
-  color: #000e1a;
-  pointer-events: none;
+#calc-typed {
+    font-size: 2rem;
+    text-align: right;
+    color: #1f1d1d;
 }
-.buttons {
-  display: grid;
-  grid-gap: 10px;
-  grid-template-columns: repeat(4, 1fr);
+/*Calculator Buttons*/
+.calc-button-row{
+    display: table;
 }
-.buttons button {
-  padding: 10px;
-  border-radius: 6px;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-  background-color: #242021;
+.calc-button-row button {
+    display: table-cell;
+    width: 25%;
+    background: #edf5ff;
+    color: #fff;
+    height: 65px;
+    font-size: 1.3rem;
+    border: none;
+    border-color:#3C4857;
+    border-width: 1px 1px 0px 0;
+    border-style: solid;
 }
-.buttons button:active {
-  transform: scale(0.99);
+.calc-button-row button.ac {
+    color: #2be3f0;
 }
-.operator {
-  color: #18beff;
+.calc-button-row button.opt {
+    color: #2be3f0;
+}
+/*The border has been managed in every fourth button so that the design will not distract.*/
+.calc-button-row button:nth-child(4n){
+    border-right: none;
+}
+.calc-button-row button:active {
+    position: relative;
+    top: 1px;
+}
+.calc-button-row button:hover {
+    background: #e4eaf2;
 }
