@@ -1,37 +1,38 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Age Calculator</title>
-    <link rel="stylesheet" 
-          href="style2.css" />
-</head>
-<body>
-    <div class="card">
-        <header>
-            <h1>AGE CALCULATOR</h1>
-        </header>
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style2.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="input-wrapper">
+        <input type="date" id="date-input" />
+        <button id="calc-age-btn">Calculate</button>
+      </div>
+      <div class="output-wrapper">
         <div>
-            <label>Enter your Date of Birth</label><br>
-            <input id="inputDob" 
-                   type="date" 
-                   value="2000-01-01" />
+          <span id="years">-</span>
+          <p>Years</p>
         </div>
-        <br />
-        <!-- Take the date from which age is to be calculated -->
         <div>
-            <label>Current Date</label><br>
-            <input id="cdate"
-                   type="date" 
-                   value="" />
+          <span id="months">-</span>
+          <p>Months</p>
         </div>
-        <br />
-        <button type="button" 
-                onclick="getDOB()">
-            Calculate
-        </button>
-        <br />
-        <div id="currentAge"></div>
-        <script src="script2.js"></script>
+        <div>
+          <span id="days">-</span>
+          <p>Days</p>
+        </div>
+      </div>
     </div>
-</body>
+    <!-- Script -->
+    <script src="script2.js"></script>
+  </body>
 </html>
