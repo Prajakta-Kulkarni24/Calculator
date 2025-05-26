@@ -19,4 +19,4 @@
     }
     // Display the result
     document.getElementById('currentAge').textContent = `Your age is ${age} years.`;
-}
+ }
