@@ -1,6 +1,9 @@
  /* style4.css */
 body {
     font-family: sans-serif;
+}
+
+.calculator  { 
     width: 300px;
     margin: 50px auto;
     padding: 20px;
