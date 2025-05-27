@@ -1,26 +1,30 @@
- function calculateLCM() {
-    let num1 = parseInt(document.getElementById("num1").value);
-    let num2 = parseInt(document.getElementById("num2").value);
+ const calculateBtn = document.getElementById('calculate-btn');
+const num1Input = document.getElementById('num1');
+const num2Input = document.getElementById('num2');
+const resultElement = document.getElementById('result');
 
-    // Check if the inputs are valid numbers
+calculateBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    const num1 = parseInt(num1Input.value);
+    const num2 = parseInt(num2Input.value);
+
     if (isNaN(num1) || isNaN(num2)) {
-        document.getElementById("result").textContent = "Invalid input. Please enter numbers.";
+        resultElement.textContent = 'Please enter valid numbers';
         return;
     }
 
-    // Find the GCD (Greatest Common Divisor)
-    function gcd(a, b) {
-        while (b) {
-            let temp = b;
-            b = a % b;
-            a = temp;
-        }
+    const lcm = calculateLCM(num1, num2);
+    resultElement.textContent = `LCM: ${lcm}`;
+});
+
+function calculateHCF(a, b) {
+    if (b === 0) {
         return a;
     }
+    return calculateHCF(b, a % b);
+}
 
-    // Calculate the LCM using the formula: LCM(a, b) = (a * b) / GCD(a, b)
-    let lcm = (num1 * num2) / gcd(num1, num2);
-
-    // Display the result
-    document.getElementById("result").textContent = "The LCM of " + num1 + " and " + num2 + " is: " + lcm;
-} 
+function calculateLCM(a, b) {
+    return (a * b) / calculateHCF(a, b);
+}
