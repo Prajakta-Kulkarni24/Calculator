@@ -40,11 +40,11 @@ button:hover {
     background-color: #3e8e41;
 }
 
-#matrix-inputs table {
+#matrix1-inputs table, #matrix2-inputs table {
     border-collapse: collapse;
 }
 
-#matrix-inputs td {
+#matrix1-inputs td, #matrix2-inputs td {
     border: 1px solid #ccc;
     padding: 5px;
 }
