@@ -46,3 +46,11 @@ button:hover {
     font-size: 18px;
     font-weight: bold;
 }
+table {
+    border-collapse: collapse;
+}
+
+td {
+    border: 1px solid #ccc;
+    padding: 5px;
+}
