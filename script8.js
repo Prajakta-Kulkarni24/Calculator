@@ -3,8 +3,8 @@ const inputsDiv = document.getElementById('inputs');
 const calculateBtn = document.getElementById('calculate-btn');
 const resultElement = document.getElementById('result');
 
-shapeSelect.addEventListener('change', (e) => {
-    const shape = shapeSelect.value;
+// Function to generate inputs based on shape
+function generateInputs(shape) {
     inputsDiv.innerHTML = '';
     if (shape === 'rectangle') {
         inputsDiv.innerHTML = `
@@ -31,6 +31,13 @@ shapeSelect.addEventListener('change', (e) => {
             <input type="number" id="height" required>
         `;
     }
+}
+
+// Generate inputs for initial shape selection
+generateInputs(shapeSelect.value);
+
+shapeSelect.addEventListener('change', (e) => {
+    generateInputs(shapeSelect.value);
 });
 
 calculateBtn.addEventListener('click', (e) => {
@@ -48,7 +55,9 @@ calculateBtn.addEventListener('click', (e) => {
         const radius = parseFloat(document.getElementById('radius').value);
         area = Math.PI * radius * radius;
     } else if (shape === 'triangle') {
-        const base = parseFloat(document.getElementById('base');
-      const height = parseFloat(document.getElementById('height');
-      area = (0.5)* base * height.
-    }    
+        const base = parseFloat(document.getElementById('base').value);
+        const height = parseFloat(document.getElementById('height').value);
+        area = 0.5 * base * height;
+    }
+    resultElement.textContent = `Area: ${area}`;
+});
