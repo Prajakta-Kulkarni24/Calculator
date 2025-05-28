@@ -11,16 +11,21 @@ createMatrixBtn.addEventListener('click', (e) => {
     const rows = parseInt(rowsInput.value);
     const cols = parseInt(colsInput.value);
     matrixInputs.innerHTML = '';
+    const table = document.createElement('table');
     for (let i = 0; i < rows; i++) {
-        const row = document.createElement('div');
+        const row = document.createElement('tr');
         for (let j = 0; j < cols; j++) {
+            const cell = document.createElement('td');
             const input = document.createElement('input');
             input.type = 'number';
             input.id = `matrix-${i}-${j}`;
-            row.appendChild(input);
+            input.style.width = '50px';
+            cell.appendChild(input);
+            row.appendChild(cell);
         }
-        matrixInputs.appendChild(row);
+        table.appendChild(row);
     }
+    matrixInputs.appendChild(table);
 });
 
 calculateBtn.addEventListener('click', (e) => {
