@@ -7,11 +7,9 @@ const operationSelect = document.getElementById('operation');
 const resultElement = document.getElementById('result');
 
 createMatrixBtn.addEventListener('click', (e) => {
-    console.log('Create matrix button clicked');
     e.preventDefault();
     const rows = parseInt(rowsInput.value);
     const cols = parseInt(colsInput.value);
-    console.log(`Rows: ${rows}, Columns: ${cols}`);
     matrixInputs.innerHTML = '';
     const table = document.createElement('table');
     for (let i = 0; i < rows; i++) {
@@ -45,31 +43,15 @@ calculateBtn.addEventListener('click', (e) => {
     }
     const operation = operationSelect.value;
     let result;
-    if (operation === 'determinant') {
-        result = calculateDeterminant(matrix);
-    } else {
-        if (operation === 'add') {
-            result = addMatrix(matrix, matrix);
-        } else if (operation === 'subtract') {
-            result = subtractMatrix(matrix, matrix);
-        } else if (operation === 'multiply') {
-            if (matrix.length === matrix[0].length) {
-                result = multiplyMatrix(matrix, matrix);
-            } else {
-                result = "Matrix multiplication is not possible for non-square matrices or matrices with different dimensions.";
-            }
-        }
+    if (operation === 'add') {
+        result = addMatrix(matrix, matrix);
+    } else if (operation === 'subtract') {
+        result = subtractMatrix(matrix, matrix);
+    } else if (operation === 'multiply') {
+        result = multiplyMatrix(matrix, matrix);
     }
     displayResult(result);
 });
-
-function calculateDeterminant(matrix) {
-    if (matrix.length === 2) {
-        return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
-    } else {
-        return "Determinant calculation is only implemented for 2x2 matrices.";
-    }
-}
 
 function addMatrix(matrix1, matrix2) {
     const result = [];
@@ -112,11 +94,12 @@ function multiplyMatrix(matrix1, matrix2) {
 }
 
 function displayResult(result) {
-    if (typeof result === 'number') {
-        resultElement.innerHTML = `Result: ${result}`;
-    } else if (typeof result === 'string') {
-        resultElement.innerHTML = result;
-    } else {
-        let resultHtml = 'Result: <br>';
-        for (let i = 0; i < result.length; i++) {
-            for (let j = 0; j < result[0].length; j++)
+    let resultHtml = '';
+    for (let i = 0; i < result.length; i++) {
+        for (let j = 0; j < result[0].length; j++) {
+            resultHtml += `${result[i][j]} `;
+        }
+        resultHtml += '<br>';
+    }
+    resultElement.innerHTML = `Result: <br>${resultHtml}`;
+}
