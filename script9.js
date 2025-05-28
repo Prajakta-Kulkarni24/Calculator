@@ -1,5 +1,35 @@
- calculateBtn.addEventListener('click', (e) => {
+
+const createMatrixBtn = document.getElementById('create-matrix-btn');
+const rowsInput = document.getElementById('rows');
+const colsInput = document.getElementById('cols');
+const matrixInputs = document.getElementById('matrix-inputs');
+const calculateBtn = document.getElementById('calculate-btn');
+const operationSelect = document.getElementById('operation');
+const resultElement = document.getElementById('result');
+
+createMatrixBtn.addEventListener('click', (e) => {
     e.preventDefault();
+    const rows = parseInt(rowsInput.value);
+    const cols = parseInt(colsInput.value);
+    matrixInputs.innerHTML = '';
+    const table = document.createElement('table');
+    for (let i = 0; i < rows; i++) {
+        const row = document.createElement('tr');
+        for (let j = 0; j < cols; j++) {
+            const cell = document.createElement('td');
+            const input = document.createElement('input');
+            input.type = 'number';
+            input.id = `matrix-${i}-${j}`;
+            input.style.width = '50px';
+            cell.appendChild(input);
+            row.appendChild(cell);
+        }
+        table.appendChild(row);
+    }
+    matrixInputs.appendChild(table);
+});
+calculateBtn.addEventListener('click', (e) => {
+    e.preveDefault();
     const rows = parseInt(rowsInput.value);
     const cols = parseInt(colsInput.value);
     const matrix = [];
