@@ -1,5 +1,4 @@
-
-const createMatrixBtn = document.getElementById('create-matrix-btn');
+ const createMatrixBtn = document.getElementById('create-matrix-btn');
 const rowsInput = document.getElementById('rows');
 const colsInput = document.getElementById('cols');
 const matrixInputs = document.getElementById('matrix-inputs');
@@ -28,8 +27,9 @@ createMatrixBtn.addEventListener('click', (e) => {
     }
     matrixInputs.appendChild(table);
 });
+
 calculateBtn.addEventListener('click', (e) => {
-    e.preveDefault();
+    e.preventDefault();
     const rows = parseInt(rowsInput.value);
     const cols = parseInt(colsInput.value);
     const matrix = [];
@@ -46,29 +46,29 @@ calculateBtn.addEventListener('click', (e) => {
     if (operation === 'determinant') {
         result = calculateDeterminant(matrix);
     } else {
-        // For addition, subtraction, and multiplication, you need two matrices
-        // For simplicity, let's assume we are calculating the result for a single matrix
         if (operation === 'add') {
-            result = addMatrix(matrix, matrix); // Adding matrix with itself
+            result = addMatrix(matrix, matrix); 
         } else if (operation === 'subtract') {
-            result = subtractMatrix(matrix, matrix); // Subtracting matrix from itself
+            result = subtractMatrix(matrix, matrix); 
         } else if (operation === 'multiply') {
-            result = multiplyMatrix(matrix, matrix); // Multiplying matrix with itself
+            if (matrix.length === matrix[0].length) {
+                result = multiplyMatrix(matrix, matrix); 
+            } else {
+                result = "Matrix multiplication is not possible for non-square matrices or matrices with different dimensions.";
+            }
         }
     }
     displayResult(result);
 });
 
-// Function to calculate determinant
 function calculateDeterminant(matrix) {
-    // Implement determinant calculation logic here
-    // For simplicity, let's assume it's a 2x2 matrix
     if (matrix.length === 2) {
         return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
+    } else {
+        return "Determinant calculation is only implemented for 2x2 matrices.";
     }
 }
 
-// Function to add two matrices
 function addMatrix(matrix1, matrix2) {
     const result = [];
     for (let i = 0; i < matrix1.length; i++) {
@@ -81,7 +81,6 @@ function addMatrix(matrix1, matrix2) {
     return result;
 }
 
-// Function to subtract two matrices
 function subtractMatrix(matrix1, matrix2) {
     const result = [];
     for (let i = 0; i < matrix1.length; i++) {
@@ -94,7 +93,6 @@ function subtractMatrix(matrix1, matrix2) {
     return result;
 }
 
-// Function to multiply two matrices
 function multiplyMatrix(matrix1, matrix2) {
     const result = [];
     for (let i = 0; i < matrix1.length; i++) {
@@ -111,18 +109,15 @@ function multiplyMatrix(matrix1, matrix2) {
     return result;
 }
 
-// Function to display result
 function displayResult(result) {
     if (typeof result === 'number') {
         resultElement.textContent = `Result: ${result}`;
+    } else if (typeof result === 'string') {
+        resultElement.textContent = result;
     } else {
         let resultHtml = 'Result: <br>';
         for (let i = 0; i < result.length; i++) {
             for (let j = 0; j < result[0].length; j++) {
                 resultHtml += `${result[i][j]} `;
             }
-            resultHtml += '<br>';
-        }
-        resultElement.innerHTML = resultHtml;
-    }
-}
+            resultHtml += '<br
