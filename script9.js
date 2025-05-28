@@ -7,9 +7,11 @@ const operationSelect = document.getElementById('operation');
 const resultElement = document.getElementById('result');
 
 createMatrixBtn.addEventListener('click', (e) => {
+    console.log('Create matrix button clicked');
     e.preventDefault();
     const rows = parseInt(rowsInput.value);
     const cols = parseInt(colsInput.value);
+    console.log(`Rows: ${rows}, Columns: ${cols}`);
     matrixInputs.innerHTML = '';
     const table = document.createElement('table');
     for (let i = 0; i < rows; i++) {
@@ -47,12 +49,12 @@ calculateBtn.addEventListener('click', (e) => {
         result = calculateDeterminant(matrix);
     } else {
         if (operation === 'add') {
-            result = addMatrix(matrix, matrix); 
+            result = addMatrix(matrix, matrix);
         } else if (operation === 'subtract') {
-            result = subtractMatrix(matrix, matrix); 
+            result = subtractMatrix(matrix, matrix);
         } else if (operation === 'multiply') {
             if (matrix.length === matrix[0].length) {
-                result = multiplyMatrix(matrix, matrix); 
+                result = multiplyMatrix(matrix, matrix);
             } else {
                 result = "Matrix multiplication is not possible for non-square matrices or matrices with different dimensions.";
             }
@@ -111,13 +113,10 @@ function multiplyMatrix(matrix1, matrix2) {
 
 function displayResult(result) {
     if (typeof result === 'number') {
-        resultElement.textContent = `Result: ${result}`;
+        resultElement.innerHTML = `Result: ${result}`;
     } else if (typeof result === 'string') {
-        resultElement.textContent = result;
+        resultElement.innerHTML = result;
     } else {
         let resultHtml = 'Result: <br>';
         for (let i = 0; i < result.length; i++) {
-            for (let j = 0; j < result[0].length; j++) {
-                resultHtml += `${result[i][j]} `;
-            }
-            resultHtml += '<br
+            for (let j = 0; j < result[0].length; j++)
