@@ -10,30 +10,35 @@ body {
 
 
 /* ------------------------------
-   NAVIGATION BAR
+   GRADIENT NAVIGATION BAR
 --------------------------------*/
 nav {
-    background: #ffffff;
-    padding: 12px 20px;
+    background: linear-gradient(90deg, #ff7b00, #ff00aa);
+    padding: 14px 20px;
+    width: 100%;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.4);
 }
 
 nav ul {
     display: flex;
-    gap: 20px;
+    gap: 25px;
     list-style: none;
     padding: 0;
     margin: 0;
+    justify-content: center;   /* NICELY CENTERED */
 }
 
 nav ul li a {
     text-decoration: none;
-    font-size: 18px;
-    color: black;
+    font-size: 20px;
+    color: white;
     font-weight: 600;
+    transition: 0.3s ease;
 }
 
 nav ul li a:hover {
-    color: #e68a00;
+    color: #ffff99;
+    text-shadow: 0 0 10px white;
 }
 
 
@@ -45,9 +50,7 @@ nav ul li a:hover {
     padding: 1.5vh;
     border: 5px solid #666666;
     border-radius: 15px;
-
-    /* Center without overlapping navbar */
-    margin: 150px auto 0 auto;   /* pushes calculator below navbar */
+    margin: 150px auto 0 auto;    /* Below navbar */
     position: relative;
     width: fit-content;
     background-color: black;
@@ -91,11 +94,13 @@ button {
     background-color: #666666;
     border-radius: 50%;
     border: 1px solid #333333;
+    transition: 0.2s ease;
 }
 
 button:hover {
     background-color: #999999;
     cursor: pointer;
+    transform: scale(1.05);
 }
 
 .operator {
