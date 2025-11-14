@@ -1,5 +1,5 @@
 /* ------------------------------
-   BODY
+   GENERAL BODY
 --------------------------------*/
 body {
     margin: 0;
@@ -8,7 +8,7 @@ body {
 }
 
 /* ------------------------------
-   STICKY NAVIGATION BAR
+   NAVIGATION BAR
 --------------------------------*/
 nav {
     position: sticky;
@@ -16,24 +16,45 @@ nav {
     z-index: 1000;
     background: linear-gradient(90deg, #ff7b00, #ff00aa);
     padding: 12px 10px;
-    width: 100%;
     box-sizing: border-box;
 }
 
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+nav .logo {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Hamburger Menu Icon */
+.hamburger {
+    display: none;
+    font-size: 28px;
+    color: white;
+    cursor: pointer;
+}
+
+/* Navigation Links */
 nav ul {
     list-style: none;
-    padding: 0;
-    margin: 0;
     display: flex;
-    flex-wrap: wrap;           /* Wrap links on small screens */
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 10px 15px;            /* row-gap column-gap */
+    gap: 12px 20px;
+    margin: 0;
+    padding: 0;
 }
 
 nav ul li a {
     text-decoration: none;
     color: white;
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 600;
     padding: 6px 12px;
     border-radius: 6px;
@@ -45,10 +66,10 @@ nav ul li a:hover {
 }
 
 /* ------------------------------
-   CALCULATOR CONTAINER
+   CALCULATOR STYLES
 --------------------------------*/
 #calculator {
-    margin: 140px auto 20px auto;  /* leave space for sticky navbar */
+    margin: 140px auto 20px auto;
     padding: 20px;
     width: fit-content;
     background-color: #111;
@@ -57,9 +78,6 @@ nav ul li a:hover {
     text-align: center;
 }
 
-/* ------------------------------
-   DISPLAY
---------------------------------*/
 .box {
     color: white;
     text-align: right;
@@ -79,9 +97,7 @@ nav ul li a:hover {
     padding-right: 1.5vh;
 }
 
-/* ------------------------------
-   BUTTONS
---------------------------------*/
+/* Buttons */
 button {
     width: 9vh;
     height: 9vh;
@@ -117,18 +133,30 @@ button:hover {
 /* ------------------------------
    MOBILE RESPONSIVE
 --------------------------------*/
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
+    .hamburger {
+        display: block;
+    }
     nav ul {
-        gap: 8px 10px;
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+    }
+    nav ul.active {
+        display: flex;
     }
     nav ul li a {
-        font-size: 14px;
-        padding: 4px 8px;
+        display: block;
+        padding: 10px;
+        font-size: 16px;
     }
+
     #calculator {
-        margin: 120px 10px 20px 10px;
+        margin: 180px 10px 20px 10px;
         padding: 15px;
     }
+
     button {
         width: 60px;
         height: 60px;
@@ -139,5 +167,4 @@ button:hover {
         height: 6vh;
         line-height: 6vh;
     }
-}
-    
+   }
