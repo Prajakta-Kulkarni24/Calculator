@@ -1,24 +1,28 @@
+/* ------------------------------
+   BODY
+--------------------------------*/
 body {
     font-size: 2.5vh;
-    top: 15%;
-    left: 40%;
-    margin: 0 auto;
+    margin: 0;
     background-color: black;
     font-family: 'Roboto', sans-serif;
 }
 
-h1 {
-    color: white;
-    text-align: center;
-    margin: 0;
+
+/* ------------------------------
+   NAVIGATION BAR
+--------------------------------*/
+nav {
+    background: #ffffff;
+    padding: 12px 20px;
 }
 
 nav ul {
     display: flex;
     gap: 20px;
     list-style: none;
-    background: #fff;
-    padding: 10px;
+    padding: 0;
+    margin: 0;
 }
 
 nav ul li a {
@@ -28,22 +32,33 @@ nav ul li a {
     font-weight: 600;
 }
 
+nav ul li a:hover {
+    color: #e68a00;
+}
+
+
+/* ------------------------------
+   CALCULATOR CONTAINER
+--------------------------------*/
 #calculator {
     width: auto;
-    height: auto;
     padding: 1.5vh;
     border: 5px solid #666666;
     border-radius: 15px;
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+
+    /* Center without overlapping navbar */
+    margin: 150px auto 0 auto;   /* pushes calculator below navbar */
+    position: relative;
+    width: fit-content;
+    background-color: black;
 }
 
+
+/* ------------------------------
+   DISPLAY BOX
+--------------------------------*/
 .box {
-    text-align:right;
+    text-align: right;
     font-size: 2.8vh;
     height: 3vh;
     line-height: 3vh;
@@ -57,28 +72,25 @@ nav ul li a {
 #last_operation_history {
     height: 1.8vh;
     font-size: 1.8vh;
-    text-align:right;
+    text-align: right;
     padding-right: 1.5vh;
     color: rgb(177, 176, 176);
     background-color: black;
 }
 
+
+/* ------------------------------
+   BUTTONS
+--------------------------------*/
 button {
-    width:9vh;
+    width: 9vh;
     height: 9vh;
-    font-weight:bold;
+    font-weight: bold;
     font-size: 3vh;
     color: white;
     background-color: #666666;
     border-radius: 50%;
     border: 1px solid #333333;
-}
-
-#backspace_btn {
-    background-image: url("../assets/back_remove.png");
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    background-size: 1.7em;
 }
 
 button:hover {
@@ -97,4 +109,11 @@ button:hover {
 #equal_sign {
     width: 100%;
     border-radius: 15px;
+}
+
+#backspace_btn {
+    background-image: url("../assets/back_remove.png");
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 1.7em;
 }
