@@ -1,170 +1,141 @@
-/* ------------------------------
-   GENERAL BODY
---------------------------------*/
-body {
-    margin: 0;
-    background-color: black;
-    font-family: 'Roboto', sans-serif;
+/* ------------------ ROOT THEMES ------------------ */
+body.dark {
+    --bg: #0f0f0f;
+    --text: white;
+    --key: #2b2b2b;
+    --key-active: #444;
+    --op: #ff8c00;
+    --equal: #1e90ff;
+    --display-bg: #000;
 }
 
-/* ------------------------------
-   NAVIGATION BAR
---------------------------------*/
+body.light {
+    --bg: #f3f3f3;
+    --text: #222;
+    --key: #ffffff;
+    --key-active: #e0e0e0;
+    --op: #ff5722;
+    --equal: #1976d2;
+    --display-bg: #ffffff;
+}
+
+/* ------------------ GLOBAL ------------------ */
+body {
+    margin: 0;
+    background: var(--bg);
+    font-family: Arial;
+    color: var(--text);
+    transition: 0.3s ease;
+}
+
+/* ------------------ NAVBAR ------------------ */
 nav {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background: linear-gradient(90deg, #ff7b00, #ff00aa);
-    padding: 12px 10px;
-    box-sizing: border-box;
+    width: 100%;
+    background: var(--key);
+    padding: 12px 0;
 }
 
 .nav-container {
+    width: 90%;
+    margin: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
 }
 
 nav .logo {
-    color: white;
     font-size: 20px;
     font-weight: bold;
+    color: var(--equal);
 }
 
-/* Hamburger Menu Icon */
+.theme-btn {
+    background: var(--equal);
+    border: none;
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 18px;
+    color: white;
+}
+
 .hamburger {
     display: none;
     font-size: 28px;
-    color: white;
     cursor: pointer;
+    color: var(--text);
 }
 
-/* Navigation Links */
 nav ul {
     list-style: none;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px 20px;
-    margin: 0;
-    padding: 0;
+    gap: 20px;
 }
 
 nav ul li a {
     text-decoration: none;
-    color: white;
-    font-size: 17px;
-    font-weight: 600;
-    padding: 6px 12px;
-    border-radius: 6px;
-    background: rgba(255,255,255,0.15);
+    color: var(--text);
 }
 
-nav ul li a:hover {
-    background: rgba(255,255,255,0.25);
-}
+/* Mobile navbar */
+@media (max-width: 768px) {
+    .hamburger { display: block; }
 
-/* ------------------------------
-   CALCULATOR STYLES
---------------------------------*/
-#calculator {
-    margin: 140px auto 20px auto;
-    padding: 20px;
-    width: fit-content;
-    background-color: #111;
-    border: 4px solid #555;
-    border-radius: 15px;
-    text-align: center;
-}
-
-.box {
-    color: white;
-    text-align: right;
-    font-size: 4vh;
-    height: 7vh;
-    line-height: 7vh;
-    padding: 0 1em;
-    border: 2px solid #e68a00;
-    border-radius: 15px;
-    background-color: black;
-}
-
-#last_operation_history {
-    color: gray;
-    font-size: 2vh;
-    text-align: right;
-    padding-right: 1.5vh;
-}
-
-/* Buttons */
-button {
-    width: 9vh;
-    height: 9vh;
-    background-color: #666;
-    color: white;
-    border: 1px solid #333;
-    border-radius: 50%;
-    font-size: 3vh;
-    font-weight: bold;
-    transition: 0.2s;
-}
-
-button:hover {
-    background-color: #999;
-    transform: scale(1.08);
-}
-
-.operator {
-    background-color: #e68a00;
-}
-
-.operator:hover {
-    background-color: #ffd11a;
-}
-
-#backspace_btn {
-    background-image: url("../assets/back_remove.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 2em;
-}
-
-/* ------------------------------
-   MOBILE RESPONSIVE
---------------------------------*/
-@media screen and (max-width: 800px) {
-    .hamburger {
-        display: block;
-    }
     nav ul {
         display: none;
         flex-direction: column;
+        background: var(--key);
         width: 100%;
-        text-align: center;
-    }
-    nav ul.active {
-        display: flex;
-    }
-    nav ul li a {
-        display: block;
-        padding: 10px;
-        font-size: 16px;
+        padding: 15px 0;
+        margin-top: 10px;
     }
 
-    #calculator {
-        margin: 180px 10px 20px 10px;
-        padding: 15px;
-    }
+    nav ul.active { display: flex; }
+}
 
-    button {
-        width: 60px;
-        height: 60px;
-        font-size: 20px;
-    }
-    .box {
-        font-size: 3vh;
-        height: 6vh;
-        line-height: 6vh;
-    }
-   }
+/* ------------------ CALCULATOR ------------------ */
+.calculator {
+    width: 320px;
+    margin: 40px auto;
+    background: var(--key);
+    padding: 20px;
+    border-radius: 15px;
+}
+
+#display {
+    width: 100%;
+    height: 60px;
+    background: var(--display-bg);
+    color: var(--text);
+    font-size: 28px;
+    border: none;
+    padding: 10px;
+    text-align: right;
+    border-radius: 10px;
+}
+
+.keys {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 15px;
+}
+
+button {
+    padding: 18px;
+    font-size: 22px;
+    background: var(--key);
+    color: var(--text);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:active {
+    background: var(--key-active);
+}
+
+.op { background: var(--op); color: #fff; }
+.equal { background: var(--equal); color: #fff; }
+.zero { grid-column: span 2; }
