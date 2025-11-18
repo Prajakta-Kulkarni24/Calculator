@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
     <link rel="stylesheet" href="assets/calc_style.css">
-    <script src="code.js"></script>
+    <script src="code.js" defer></script>
 </head>
 <body>
 
@@ -50,29 +50,29 @@
         </tr>
 
         <tr>
-            <td><button onclick="button_number(7)">7</button></td>
-            <td><button onclick="button_number(8)">8</button></td>
-            <td><button onclick="button_number(9)">9</button></td>
+            <td><button onclick="button_number('7')">7</button></td>
+            <td><button onclick="button_number('8')">8</button></td>
+            <td><button onclick="button_number('9')">9</button></td>
             <td><button class="operator" onclick="button_number('-')">-</button></td>
         </tr>
 
         <tr>
-            <td><button onclick="button_number(4)">4</button></td>
-            <td><button onclick="button_number(5)">5</button></td>
-            <td><button onclick="button_number(6)">6</button></td>
+            <td><button onclick="button_number('4')">4</button></td>
+            <td><button onclick="button_number('5')">5</button></td>
+            <td><button onclick="button_number('6')">6</button></td>
             <td><button class="operator" onclick="button_number('*')">×</button></td>
         </tr>
 
         <tr>
-            <td><button onclick="button_number(1)">1</button></td>
-            <td><button onclick="button_number(2)">2</button></td>
-            <td><button onclick="button_number(3)">3</button></td>
+            <td><button onclick="button_number('1')">1</button></td>
+            <td><button onclick="button_number('2')">2</button></td>
+            <td><button onclick="button_number('3')">3</button></td>
             <td><button class="operator" onclick="button_number('/')">÷</button></td>
         </tr>
 
         <tr>
             <td><button onclick="plus_minus()">±</button></td>
-            <td><button onclick="button_number(0)">0</button></td>
+            <td><button onclick="button_number('0')">0</button></td>
             <td><button onclick="button_number('.')">.</button></td>
             <td><button class="operator" onclick="button_number('=')">=</button></td>
         </tr>
@@ -86,5 +86,5 @@
     }
 </script>
 
-</body> 
+</body>
 </html>
