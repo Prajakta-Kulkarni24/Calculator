@@ -28,7 +28,6 @@ function button_number(btn) {
     if (["+", "-", "*", "/"].includes(btn)) {
         operator = btn;
 
-        // Save first number
         if (numbers.length === 0) {
             numbers.push(box.innerText);
             historyBox.innerText = box.innerText + " " + operator;
@@ -43,7 +42,7 @@ function button_number(btn) {
         return;
     }
 
-    // EQUAL BUTTON (=)
+    // EQUAL
     if (btn === "=" && operator !== null && numbers.length > 0) {
         numbers[1] = box.innerText;
 
@@ -59,7 +58,6 @@ function button_number(btn) {
     }
 }
 
-//---- CALCULATE FUNCTION ----//
 function calculate(a, b, op) {
     a = parseFloat(a);
     b = parseFloat(b);
@@ -72,7 +70,6 @@ function calculate(a, b, op) {
     }
 }
 
-//---- C (CLEAR ALL) ----//
 function button_clear() {
     box.innerText = "0";
     historyBox.innerText = "";
@@ -81,45 +78,38 @@ function button_clear() {
     firstNum = true;
 }
 
-//---- CE (CLEAR ENTRY) ----//
 function clear_entry() {
     box.innerText = "0";
     firstNum = true;
 }
 
-//---- BACKSPACE ----//
 function backspace_remove() {
     box.innerText = box.innerText.slice(0, -1) || "0";
     if (box.innerText === "0") firstNum = true;
 }
 
-//---- +/- ----//
 function plus_minus() {
     if (box.innerText !== "0") {
         box.innerText = (parseFloat(box.innerText) * -1).toString();
     }
 }
 
-//---- √x ----//
 function square_root() {
     box.innerText = Math.sqrt(parseFloat(box.innerText)).toString();
     firstNum = true;
 }
 
-//---- x² ----//
 function power_of() {
     box.innerText = Math.pow(parseFloat(box.innerText), 2).toString();
     firstNum = true;
 }
 
-//---- 1/x ----//
 function division_one() {
     let v = parseFloat(box.innerText);
     box.innerText = v === 0 ? "Error" : (1 / v).toString();
     firstNum = true;
 }
 
-//---- % ----//
 function calculate_percentage() {
     if (numbers.length > 0) {
         let base = parseFloat(numbers[0]);
@@ -129,4 +119,4 @@ function calculate_percentage() {
         box.innerText = (parseFloat(box.innerText) / 100).toString();
     }
     firstNum = true;
-}
+    }
