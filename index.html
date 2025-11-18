@@ -3,198 +3,253 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Responsive Calculator</title>
-
+<title>Calculator</title>
 <style>
-/* ------------------- GLOBAL ------------------- */
+/* ---------------------- GLOBAL ------------------------- */
 body {
     margin: 0;
+    padding: 0;
     font-family: Arial, sans-serif;
-    background: #e6e6e6;
+    background: #f2f2f2;
 }
 
-/* ------------------- NAVBAR ------------------- */
-nav {
-    background: #333;
-    color: white;
-    padding: 12px 20px;
+/* ---------------------- NAVBAR ------------------------- */
+.navbar {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
+    background: #3b3b3b;
+    color: white;
+    padding: 14px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
-nav ul {
-    list-style: none;
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.nav-links {
     display: flex;
-    gap: 20px;
+    gap: 15px;
+    align-items: center;
 }
 
-nav a {
+.nav-links a {
     color: white;
     text-decoration: none;
     font-size: 16px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: 0.2s;
 }
 
-/* Hamburger Menu */
+.nav-links a:hover {
+    background: #555;
+}
+
+/* Hamburger */
 .hamburger {
     display: none;
     flex-direction: column;
     cursor: pointer;
-}
-.hamburger div {
-    width: 25px;
-    height: 3px;
-    background: white;
-    margin: 4px;
+    gap: 5px;
 }
 
-/* Mobile Navigation */
+.hamburger span {
+    width: 28px;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+}
+
+/* Responsive Navigation */
 @media (max-width: 768px) {
-    nav ul {
+    .nav-links {
         position: absolute;
         top: 60px;
         right: 0;
-        background: #333;
-        width: 180px;
+        width: 220px;
         flex-direction: column;
-        padding: 15px;
+        background: #3b3b3b;
+        padding: 10px 0;
         display: none;
+        border-radius: 0 0 8px 8px;
     }
-    nav ul.active {
+    .nav-links a {
         display: block;
+        text-align: center;
+        padding: 10px 0;
+        margin: 0;
+        border-radius: 0;
+    }
+    .nav-links.active {
+        display: flex;
     }
     .hamburger {
         display: flex;
     }
 }
 
-/* ------------------- CALCULATOR ------------------- */
-.calculator {
-    width: 100%;
-    max-width: 350px;
-    margin: 40px auto;
-    background: #f7f7f7;
+/* ---------------------- CALCULATOR ------------------------- */
+.calc-container {
+    width: 320px;
+    margin: 60px auto;
     padding: 20px;
+    background: #e0e0e0;
     border-radius: 12px;
-    box-shadow: 0 0 10px #0002;
+    box-shadow: 0px 0px 10px #0003;
 }
 
-#display {
+.display {
     width: 100%;
-    padding: 15px;
-    font-size: 22px;
-    border: none;
+    height: 60px;
+    background: #ffffff;
     border-radius: 8px;
+    font-size: 26px;
     text-align: right;
-    margin-bottom: 20px;
-    background: #ddd;
+    padding: 15px;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 .buttons {
+    margin-top: 20px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 12px;
 }
 
-.buttons button {
+button {
     padding: 18px;
-    font-size: 18px;
+    font-size: 20px;
     border: none;
-    border-radius: 8px;
+    background: #d3d3d3;
+    border-radius: 10px;
     cursor: pointer;
-    background: #ccc;
     transition: 0.2s;
 }
 
-.buttons button:active {
+button:active {
     transform: scale(0.95);
-    background: #b5b5b5;
+    background: #b8b8b8;
 }
 
-.clear-btn {
-    grid-column: span 4;
-    background: #ff5b5b !important;
+.equal {
+    background: #4a4a4a !important;
     color: white;
 }
+
+@media (max-width: 400px) {
+    .calc-container {
+        width: 90%;
+        margin: 60px auto;
+    }
+
+    .buttons button {
+        padding: 15px;
+        font-size: 18px;
+    }
+
+    .display {
+        font-size: 22px;
+        height: 50px;
+        padding: 12px;
+    }
+}
+
 </style>
 </head>
 <body>
 
-<!-- ------------------- NAVBAR ------------------- -->
-<nav>
+<!-- --------------------- NAVBAR --------------------------- -->
+<nav class="navbar">
     <div class="logo">Calculator</div>
 
-    <ul id="nav-links">
-        <li><a href="scientific_calc.html">Scientific Calc</a></li>
-        <li><a href="age_calc.html">Age Calc</a></li>
-        <li><a href="binary_calc.html">Binary Calc</a></li>
-        <li><a href="lcm_calc.html">LCM Calc</a></li>
-        <li><a href="hcf_calc.html">HCF Calc</a></li>
-        <li><a href="quadratic_calc.html">Quadratic Calc</a></li>
-        <li><a href="pc_calc.html">P&C Calc</a></li>
-        <li><a href="area_calc.html">Area Calc</a></li>
-        <li><a href="matrix_calc.html">Matrix Calc</a></li>
-    </ul>
-
     <div class="hamburger" onclick="toggleMenu()">
-        <div></div>
-        <div></div>
-        <div></div>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <div class="nav-links" id="menu">
+        <a href="scientific_calc.html">scientific_calc</a>
+        <a href="About.html">age_calc</a>
+        <a href="Contact.html">binary_calc</a>
+        <a href="file.html">lcm_calc</a>
+        <a href="page.html">hcf_calc</a>
+        <a href="calc.html">quadratic_calc</a>
+        <a href="pc.html">p&c_calc</a>
+        <a href="area.html">area_calc</a>
+        <a href="matrix.html">matrix_calc</a>
     </div>
 </nav>
 
-<!-- ------------------- CALCULATOR ------------------- -->
-<div class="calculator">
-    <input type="text" id="display" disabled>
+<!-- --------------------- CALCULATOR --------------------------- -->
+<div class="calc-container">
+    <div id="display" class="display">0</div>
 
     <div class="buttons">
-        <button onclick="press('7')">7</button>
-        <button onclick="press('8')">8</button>
-        <button onclick="press('9')">9</button>
-        <button onclick="press('/')">/</button>
+        <button onclick="clearDisplay()">C</button>
+        <button onclick="append('%')">%</button>
+        <button onclick="backspace()">⌫</button>
+        <button onclick="append('/')">÷</button>
 
-        <button onclick="press('4')">4</button>
-        <button onclick="press('5')">5</button>
-        <button onclick="press('6')">6</button>
-        <button onclick="press('*')">*</button>
+        <button onclick="append('7')">7</button>
+        <button onclick="append('8')">8</button>
+        <button onclick="append('9')">9</button>
+        <button onclick="append('*')">×</button>
 
-        <button onclick="press('1')">1</button>
-        <button onclick="press('2')">2</button>
-        <button onclick="press('3')">3</button>
-        <button onclick="press('-')">-</button>
+        <button onclick="append('4')">4</button>
+        <button onclick="append('5')">5</button>
+        <button onclick="append('6')">6</button>
+        <button onclick="append('-')">−</button>
 
-        <button onclick="press('0')">0</button>
-        <button onclick="press('.')">.</button>
-        <button onclick="calculate()">=</button>
-        <button onclick="press('+')">+</button>
+        <button onclick="append('1')">1</button>
+        <button onclick="append('2')">2</button>
+        <button onclick="append('3')">3</button>
+        <button onclick="append('+')">+</button>
 
-        <button class="clear-btn" onclick="clearDisplay()">CLEAR</button>
+        <button onclick="append('0')" style="grid-column: span 2;">0</button>
+        <button onclick="append('.')">.</button>
+        <button class="equal" onclick="calculate()">=</button>
     </div>
 </div>
 
-<!-- ------------------- JAVASCRIPT ------------------- -->
 <script>
-function press(value) {
-    document.getElementById("display").value += value;
+function toggleMenu() {
+    document.getElementById("menu").classList.toggle("active");
 }
 
-function clearDisplay() {
-    document.getElementById("display").value = "";
-}
-
-function calculate() {
+function append(value) {
     let display = document.getElementById("display");
-    try {
-        display.value = eval(display.value);
-    } catch {
-        display.value = "Error";
+    if (display.innerText === "0") {
+        display.innerText = value;
+    } else {
+        display.innerText += value;
     }
 }
 
-function toggleMenu() {
-    document.getElementById("nav-links").classList.toggle("active");
+function clearDisplay() {
+    document.getElementById("display").innerText = "0";
+}
+
+function backspace() {
+    let text = document.getElementById("display").innerText;
+    document.getElementById("display").innerText =
+        text.length > 1 ? text.slice(0, -1) : "0";
+}
+
+function calculate() {
+    try {
+        let result = eval(document.getElementById("display").innerText);
+        document.getElementById("display").innerText = result;
+    } catch {
+        document.getElementById("display").innerText = "Error";
+    }
 }
 </script>
-
 </body>
 </html>
