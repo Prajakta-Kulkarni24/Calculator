@@ -3,23 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator - Dark/Light Mode</title>
+    <title>Responsive Calculator</title>
 
+    <!-- CSS -->
     <link rel="stylesheet" href="assets/calc_style.css">
-    <script defer src="code.js"></script>
+
+    <!-- JS -->
+    <script src="code.js" defer></script>
 </head>
+<body>
 
-<body class="dark">
-
-<!-- ⭐ NAVIGATION BAR -->
+<!-- ⭐ NAVIGATION BAR WITH HAMBURGER -->
 <nav>
     <div class="nav-container">
         <div class="logo">Calculator</div>
 
-        <!-- Theme Toggle Button -->
-        <button class="theme-btn" onclick="toggleTheme()">🌙</button>
+        <!-- Dark/Light Toggle -->
+        <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
 
         <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+
         <ul id="nav-links">
             <li><a href="scientific_calc.html">scientific_calc</a></li>
             <li><a href="About.html">age_calc</a></li>
@@ -34,41 +37,56 @@
     </div>
 </nav>
 
-<!-- ⭐ CALCULATOR -->
-<div class="calculator">
-    <input type="text" id="display" readonly>
+<!-- ⭐ RESPONSIVE CALCULATOR -->
+<div id="calculator">
+    <h1 class="calc-title">Calculator</h1>
 
-    <div class="keys">
-        <button onclick="clearAll()" class="op">C</button>
-        <button onclick="backspace()" class="op">⌫</button>
-        <button onclick="press('%')" class="op">%</button>
-        <button onclick="press('/')" class="op">÷</button>
+    <p id="last_operation_history"></p>
+    <p id="box" class="box">0</p>
 
-        <button onclick="press('7')">7</button>
-        <button onclick="press('8')">8</button>
-        <button onclick="press('9')">9</button>
-        <button onclick="press('*')" class="op">×</button>
+    <div class="btn-grid">
+        <button onclick="calculate_percentage()">%</button>
+        <button onclick="clear_entry()">CE</button>
+        <button onclick="button_clear()">C</button>
+        <button onclick="backspace_remove()">⌫</button>
 
-        <button onclick="press('4')">4</button>
-        <button onclick="press('5')">5</button>
-        <button onclick="press('6')">6</button>
-        <button onclick="press('-')" class="op">−</button>
+        <button onclick="division_one()">1/x</button>
+        <button onclick="power_of()">x²</button>
+        <button onclick="square_root()">√</button>
+        <button class="operator" onclick="button_number('+')">+</button>
 
-        <button onclick="press('1')">1</button>
-        <button onclick="press('2')">2</button>
-        <button onclick="press('3')">3</button>
-        <button onclick="press('+')" class="op">+</button>
+        <button onclick="button_number('7')">7</button>
+        <button onclick="button_number('8')">8</button>
+        <button onclick="button_number('9')">9</button>
+        <button class="operator" onclick="button_number('-')">−</button>
 
-        <button onclick="press('0')" class="zero">0</button>
-        <button onclick="press('.')">.</button>
-        <button onclick="calculate()" class="equal">=</button>
+        <button onclick="button_number('4')">4</button>
+        <button onclick="button_number('5')">5</button>
+        <button onclick="button_number('6')">6</button>
+        <button class="operator" onclick="button_number('*')">×</button>
+
+        <button onclick="button_number('1')">1</button>
+        <button onclick="button_number('2')">2</button>
+        <button onclick="button_number('3')">3</button>
+        <button class="operator" onclick="button_number('/')">÷</button>
+
+        <button onclick="plus_minus()">±</button>
+        <button onclick="button_number('0')">0</button>
+        <button onclick="button_number('.')">.</button>
+        <button class="operator" onclick="button_number('=')">=</button>
     </div>
 </div>
 
 <script>
-function toggleMenu() {
-    document.getElementById("nav-links").classList.toggle("active");
-}
+    function toggleMenu() {
+        document.getElementById('nav-links').classList.toggle('active');
+    }
+
+    function toggleTheme() {
+        document.body.classList.toggle("light-mode");
+        let btn = document.querySelector(".theme-toggle");
+        btn.textContent = document.body.classList.contains("light-mode") ? "☀️" : "🌙";
+    }
 </script>
 
 </body>
