@@ -1,155 +1,132 @@
-var operators = ["+", "-", "/", "*"];
+let box = document.getElementById("box");
+let historyBox = document.getElementById("last_operation_history");
 
-var box = document.getElementById("box");
-var last_operation_history = document.getElementById("last_operation_history");
+let firstNum = true;
+let numbers = [];
+let operator = null;
+let lastButton = null;
 
-var firstNum = true;
-var numbers = [];
-var operator_value = null;
-var last_button = null;
-var calc_operator = null;
-var last_operator = null;
+// MAIN INPUT HANDLER
+function button_number(btn) {
+    lastButton = btn;
 
-var key_combination = [];
+    // NUMBER OR DOT
+    if (!["+", "-", "*", "/", "="].includes(btn)) {
 
-function button_number(button) {
-    last_button = button;
-
-    // Number or dot
-    if (!operators.includes(button) && button != "=") {
         if (firstNum) {
-            box.innerText = (button == ".") ? "0." : button;
+            box.innerText = (btn === ".") ? "0." : btn;
             firstNum = false;
         } else {
-            if (button == "." && box.innerText.includes(".")) return;
+            if (btn === "." && box.innerText.includes(".")) return;
             if (box.innerText.length >= 20) return;
-            box.innerText += button;
+            box.innerText += btn;
         }
-    } 
-    // Operator or equal
-    else {
-        // Set operator
-        if (operators.includes(button)) {
-            operator_value = button;
-            last_operator = button == "*" ? "×" : button == "/" ? "÷" : button;
-            firstNum = true;
-            showSelectedOperator();
-        }
+        return;
+    }
 
-        // First number
-        if (numbers.length == 0 && operators.includes(button)) {
+    // OPERATOR
+    if (["+", "-", "*", "/"].includes(btn)) {
+        operator = btn;
+
+        // Save first number
+        if (numbers.length === 0) {
             numbers.push(box.innerText);
-            last_operation_history.innerText = box.innerText + " " + last_operator;
-        } 
-        // Equal pressed
-        else if (button == "=" && operator_value && numbers.length > 0) {
+            historyBox.innerText = box.innerText + " " + operator;
+        } else if (numbers.length === 1) {
             numbers[1] = box.innerText;
-            var total = calculate(numbers[0], numbers[1], operator_value);
-            box.innerText = total;
-            last_operation_history.innerText = numbers[0] + " " + last_operator + " " + numbers[1] + " =";
-            numbers = [total];
-            operator_value = null;
-            firstNum = true;
-            showSelectedOperator();
+            box.innerText = calculate(numbers[0], numbers[1], operator);
+            numbers = [box.innerText];
+            historyBox.innerText = box.innerText + " " + operator;
         }
+
+        firstNum = true;
+        return;
+    }
+
+    // EQUAL BUTTON (=)
+    if (btn === "=" && operator !== null && numbers.length > 0) {
+        numbers[1] = box.innerText;
+
+        let result = calculate(numbers[0], numbers[1], operator);
+        box.innerText = result;
+
+        historyBox.innerText =
+            numbers[0] + " " + operator + " " + numbers[1] + " =";
+
+        numbers = [result];
+        operator = null;
+        firstNum = true;
     }
 }
 
-// Highlight selected operator
-function showSelectedOperator() {
-    var elements = document.getElementsByClassName("operator");
-    for (var i = 0; i < elements.length; i++) {
-        elements[i].style.backgroundColor = "#e68a00";
+//---- CALCULATE FUNCTION ----//
+function calculate(a, b, op) {
+    a = parseFloat(a);
+    b = parseFloat(b);
+
+    switch (op) {
+        case "+": return a + b;
+        case "-": return a - b;
+        case "*": return a * b;
+        case "/": return b == 0 ? "Error" : a / b;
     }
-    if (operator_value == "+") document.getElementById("plusOp").style.backgroundColor = "#ffd11a";
-    else if (operator_value == "-") document.getElementById("subOp").style.backgroundColor = "#ffd11a";
-    else if (operator_value == "*") document.getElementById("multiOp").style.backgroundColor = "#ffd11a";
-    else if (operator_value == "/") document.getElementById("divOp").style.backgroundColor = "#ffd11a";
 }
 
-// Calculate result
-function calculate(num1, num2, operator) {
-    num1 = parseFloat(num1);
-    num2 = parseFloat(num2);
-    var total;
-    switch (operator) {
-        case "+": total = num1 + num2; break;
-        case "-": total = num1 - num2; break;
-        case "*": total = num1 * num2; break;
-        case "/": total = num2 == 0 ? "Error" : num1 / num2; break;
-    }
-    if (typeof total === "number" && !Number.isInteger(total)) total = parseFloat(total.toPrecision(12));
-    return total;
-}
-
-// Clear everything
+//---- C (CLEAR ALL) ----//
 function button_clear() {
     box.innerText = "0";
-    last_operation_history.innerText = "";
-    firstNum = true;
+    historyBox.innerText = "";
     numbers = [];
-    operator_value = null;
-    last_operator = null;
-    showSelectedOperator();
+    operator = null;
+    firstNum = true;
 }
 
-// Clear last entry
+//---- CE (CLEAR ENTRY) ----//
 function clear_entry() {
     box.innerText = "0";
     firstNum = true;
 }
 
-// Backspace
+//---- BACKSPACE ----//
 function backspace_remove() {
     box.innerText = box.innerText.slice(0, -1) || "0";
-    firstNum = box.innerText === "0";
-    showSelectedOperator();
+    if (box.innerText === "0") firstNum = true;
 }
 
-// Plus-minus
+//---- +/- ----//
 function plus_minus() {
-    if (box.innerText != "0") box.innerText = (-parseFloat(box.innerText)).toString();
+    if (box.innerText !== "0") {
+        box.innerText = (parseFloat(box.innerText) * -1).toString();
+    }
 }
 
-// Square root
+//---- √x ----//
 function square_root() {
-    box.innerText = Math.sqrt(parseFloat(box.innerText));
+    box.innerText = Math.sqrt(parseFloat(box.innerText)).toString();
     firstNum = true;
 }
 
-// Power of 2
+//---- x² ----//
 function power_of() {
-    box.innerText = Math.pow(parseFloat(box.innerText), 2);
+    box.innerText = Math.pow(parseFloat(box.innerText), 2).toString();
     firstNum = true;
 }
 
-// 1 / x
+//---- 1/x ----//
 function division_one() {
-    var val = parseFloat(box.innerText);
-    box.innerText = val != 0 ? 1 / val : "Error";
+    let v = parseFloat(box.innerText);
+    box.innerText = v === 0 ? "Error" : (1 / v).toString();
     firstNum = true;
 }
 
-// Percentage
+//---- % ----//
 function calculate_percentage() {
     if (numbers.length > 0) {
-        box.innerText = (numbers[0] * parseFloat(box.innerText) / 100).toString();
+        let base = parseFloat(numbers[0]);
+        let perc = parseFloat(box.innerText);
+        box.innerText = (base * perc / 100).toString();
     } else {
         box.innerText = (parseFloat(box.innerText) / 100).toString();
     }
     firstNum = true;
 }
-
-// Keyboard support
-document.addEventListener('keydown', function(e) {
-    if (isFinite(e.key) || e.key == "." || operators.includes(e.key) || e.key == "Enter") {
-        e.preventDefault();
-        button_number(e.key == "Enter" ? "=" : e.key);
-    } else if (e.key == "Backspace") {
-        e.preventDefault();
-        backspace_remove();
-    } else if (e.key == "Delete") {
-        e.preventDefault();
-        button_clear();
-    }
-});
