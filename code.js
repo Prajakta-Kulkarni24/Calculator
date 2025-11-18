@@ -1,122 +1,40 @@
-let box = document.getElementById("box");
-let historyBox = document.getElementById("last_operation_history");
+let display = document.getElementById("display");
 
-let firstNum = true;
-let numbers = [];
-let operator = null;
-let lastButton = null;
+// Button press
+function press(value) {
+    display.value += value;
+}
 
-// MAIN INPUT HANDLER
-function button_number(btn) {
-    lastButton = btn;
+// Clear all
+function clearAll() {
+    display.value = "";
+}
 
-    // NUMBER OR DOT
-    if (!["+", "-", "*", "/", "="].includes(btn)) {
+// Backspace
+function backspace() {
+    display.value = display.value.slice(0, -1);
+}
 
-        if (firstNum) {
-            box.innerText = (btn === ".") ? "0." : btn;
-            firstNum = false;
-        } else {
-            if (btn === "." && box.innerText.includes(".")) return;
-            if (box.innerText.length >= 20) return;
-            box.innerText += btn;
-        }
-        return;
-    }
-
-    // OPERATOR
-    if (["+", "-", "*", "/"].includes(btn)) {
-        operator = btn;
-
-        if (numbers.length === 0) {
-            numbers.push(box.innerText);
-            historyBox.innerText = box.innerText + " " + operator;
-        } else if (numbers.length === 1) {
-            numbers[1] = box.innerText;
-            box.innerText = calculate(numbers[0], numbers[1], operator);
-            numbers = [box.innerText];
-            historyBox.innerText = box.innerText + " " + operator;
-        }
-
-        firstNum = true;
-        return;
-    }
-
-    // EQUAL
-    if (btn === "=" && operator !== null && numbers.length > 0) {
-        numbers[1] = box.innerText;
-
-        let result = calculate(numbers[0], numbers[1], operator);
-        box.innerText = result;
-
-        historyBox.innerText =
-            numbers[0] + " " + operator + " " + numbers[1] + " =";
-
-        numbers = [result];
-        operator = null;
-        firstNum = true;
+// Calculate result
+function calculate() {
+    try {
+        display.value = eval(display.value);
+    } catch {
+        display.value = "Error";
     }
 }
 
-function calculate(a, b, op) {
-    a = parseFloat(a);
-    b = parseFloat(b);
+// Toggle Theme
+function toggleTheme() {
+    let body = document.body;
 
-    switch (op) {
-        case "+": return a + b;
-        case "-": return a - b;
-        case "*": return a * b;
-        case "/": return b == 0 ? "Error" : a / b;
-    }
-}
-
-function button_clear() {
-    box.innerText = "0";
-    historyBox.innerText = "";
-    numbers = [];
-    operator = null;
-    firstNum = true;
-}
-
-function clear_entry() {
-    box.innerText = "0";
-    firstNum = true;
-}
-
-function backspace_remove() {
-    box.innerText = box.innerText.slice(0, -1) || "0";
-    if (box.innerText === "0") firstNum = true;
-}
-
-function plus_minus() {
-    if (box.innerText !== "0") {
-        box.innerText = (parseFloat(box.innerText) * -1).toString();
-    }
-}
-
-function square_root() {
-    box.innerText = Math.sqrt(parseFloat(box.innerText)).toString();
-    firstNum = true;
-}
-
-function power_of() {
-    box.innerText = Math.pow(parseFloat(box.innerText), 2).toString();
-    firstNum = true;
-}
-
-function division_one() {
-    let v = parseFloat(box.innerText);
-    box.innerText = v === 0 ? "Error" : (1 / v).toString();
-    firstNum = true;
-}
-
-function calculate_percentage() {
-    if (numbers.length > 0) {
-        let base = parseFloat(numbers[0]);
-        let perc = parseFloat(box.innerText);
-        box.innerText = (base * perc / 100).toString();
+    if (body.classList.contains("dark")) {
+        body.classList.remove("dark");
+        body.classList.add("light");
+        document.querySelector('.theme-btn').textContent = "☀️";
     } else {
-        box.innerText = (parseFloat(box.innerText) / 100).toString();
+        body.classList.remove("light");
+        body.classList.add("dark");
+        document.querySelector('.theme-btn').textContent = "🌙";
     }
-    firstNum = true;
-    }
+}
