@@ -1,48 +1,227 @@
  <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Age Calculator</title>
-    <link rel="stylesheet" 
-          href="style2.css" />
- <nav>
- <a href="index.html">home</a><br>
-  <a href="scientific_calc.html">scientific_calc</a><br>
- <a href="Contact.html">binary_calc</a><br>
- <a href="file.html">lcm_calc</a><br>
- <a href ="page.html">hcf_calc</a><br>
-  <a href="calc.html">quadratic_calc</a><br>
-  <a href="pc.html">p&c_calc</a><br>
-  <a href="area.html">area_calc</a><br>
-  <a href="matrix.html">matrix_calc</a>
- </nav>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Age Calculator</title>
+<style>
+/* ---------------------- GLOBAL ------------------------- */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+}
+
+/* ---------------------- NAVBAR ------------------------- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #3b3b3b;
+    color: white;
+    padding: 14px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: 0.2s;
+}
+
+.nav-links a:hover {
+    background: #555;
+}
+
+/* Hamburger */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.hamburger span {
+    width: 28px;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+}
+
+/* Responsive Navigation */
+@media (max-width: 768px) {
+    .nav-links {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 220px;
+        flex-direction: column;
+        background: #3b3b3b;
+        padding: 10px 0;
+        display: none;
+        border-radius: 0 0 8px 8px;
+    }
+    .nav-links a {
+        display: block;
+        text-align: center;
+        padding: 10px 0;
+        margin: 0;
+        border-radius: 0;
+    }
+    .nav-links.active {
+        display: flex;
+    }
+    .hamburger {
+        display: flex;
+    }
+}
+
+/* ---------------------- AGE CALCULATOR CARD ------------------------- */
+.card {
+    width: 350px;
+    margin: 60px auto;
+    padding: 20px;
+    background: #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0px 0px 10px #0003;
+}
+
+.card header h1 {
+    text-align: center;
+}
+
+.card div {
+    margin: 10px 0;
+}
+
+input[type="date"] {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    background: #4a4a4a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:active {
+    transform: scale(0.95);
+    background: #333;
+}
+
+#currentAge {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+@media (max-width: 400px) {
+    .card {
+        width: 90%;
+        margin: 60px auto;
+        padding: 15px;
+    }
+
+    button {
+        font-size: 16px;
+        padding: 10px;
+    }
+}
+</style>
 </head>
 <body>
-    <div class="card">
-        <header>
-            <h1>AGE CALCULATOR</h1>
-        </header>
-        <div>
-            <label>Enter your Date of Birth</label><br>
-            <input id="inputDob" 
-                   type="date" 
-                   value="2000-01-01" />
-        </div>
-        <br />
-        <!-- Take the date from which age is to be calculated -->
-        <div>
-            <label>Current Date</label><br>
-            <input id="cdate"
-                   type="date" 
-                   value="" />
-        </div>
-        <br />
-        <button type="button" 
-                onclick="getDOB()">
-            Calculate
-        </button>
-        <br />
-        <div id="currentAge"></div>
-        <script src="script2.js"></script>
+
+<!-- --------------------- NAVBAR --------------------------- -->
+<nav class="navbar">
+    <div class="logo">Age Calculator</div>
+
+    <div class="hamburger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
     </div>
+
+    <div class="nav-links" id="menu">
+        <a href="index.html">home</a>
+        <a href="scientific_calc.html">scientific_calc</a>
+        <a href="Contact.html">binary_calc</a>
+        <a href="file.html">lcm_calc</a>
+        <a href="page.html">hcf_calc</a>
+        <a href="calc.html">quadratic_calc</a>
+        <a href="pc.html">p&c_calc</a>
+        <a href="area.html">area_calc</a>
+        <a href="matrix.html">matrix_calc</a>
+    </div>
+</nav>
+
+<!-- --------------------- AGE CALCULATOR --------------------------- -->
+<div class="card">
+    <header>
+        <h1>AGE CALCULATOR</h1>
+    </header>
+    <div>
+        <label>Enter your Date of Birth</label><br>
+        <input id="inputDob" type="date" value="2000-01-01" />
+    </div>
+    <div>
+        <label>Current Date</label><br>
+        <input id="cdate" type="date" value="" />
+    </div>
+    <button type="button" onclick="getDOB()">Calculate</button>
+    <div id="currentAge"></div>
+</div>
+
+<script>
+function toggleMenu() {
+    document.getElementById("menu").classList.toggle("active");
+}
+
+// Example age calculator function
+function getDOB() {
+    const dob = new Date(document.getElementById("inputDob").value);
+    const current = new Date(document.getElementById("cdate").value || new Date());
+    if(dob > current){
+        document.getElementById("currentAge").innerText = "Invalid Date";
+        return;
+    }
+    let age = current.getFullYear() - dob.getFullYear();
+    let monthDiff = current.getMonth() - dob.getMonth();
+    let dayDiff = current.getDate() - dob.getDate();
+    if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+        age--;
+    }
+    document.getElementById("currentAge").innerText = "Your Age: " + age + " years";
+}
+</script>
+
 </body>
 </html>
