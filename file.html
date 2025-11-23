@@ -1,45 +1,220 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LCM Calculator</title>
-    <link rel="stylesheet" href="style4.css">
-</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LCM Calculator</title>
 
+<style>
+/* ---------------------- GLOBAL ------------------------- */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+}
+
+/* ---------------------- NAVBAR ------------------------- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #3b3b3b;
+    color: white;
+    padding: 14px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: 0.2s;
+}
+
+.nav-links a:hover {
+    background: #555;
+}
+
+/* Hamburger */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 28px;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+}
+
+/* Responsive Navigation */
+@media (max-width: 768px) {
+    .nav-links {
+        position: absolute;
+        right: 0;
+        top: 60px;
+        width: 220px;
+        display: none;
+        flex-direction: column;
+        background: #3b3b3b;
+        border-radius: 0 0 8px 8px;
+    }
+    .nav-links a {
+        padding: 12px 0;
+        text-align: center;
+    }
+    .nav-links.active {
+        display: flex;
+    }
+    .hamburger {
+        display: flex;
+    }
+}
+
+/* ---------------------- CALCULATOR ------------------------- */
+.calculator {
+    width: 90%;
+    max-width: 400px;
+    margin: 60px auto;
+    padding: 25px;
+    background: #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 0 15px #0003;
+}
+
+.calculator h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+/* Form styling */
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 6px;
+    border-radius: 8px;
+    border: 1px solid #999;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    border: none;
+    background: #404040;
+    color: white;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:active {
+    background: #333;
+    transform: scale(0.95);
+}
+
+/* Result text */
+#result {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+}
+</style>
+
+</head>
 <body>
 
 <!-- ---------------------- NAVBAR ------------------------- -->
 <nav class="navbar">
-    <a href="index.html">Home</a>
-    <a href="scientific_calc.html">Scientific_Calculator</a>
-    <a href="About.html">Age_Calculator</a>
-    <a href="Contact.html">Binary_Calculator</a>
-    <a href="page.html">HCF_Calculator</a>
-    <a href="calc.html">Quadratic_Calculator</a>
-    <a href="pc.html">P&C_Calculator</a>
-    <a href="area.html">Area_Calculator</a>
-    <a href="matrix.html">Matrix_Calculator</a>
+    <div class="logo">LCM Calc</div>
+
+    <div class="hamburger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <div class="nav-links" id="menu">
+        <a href="index.html">Home</a>
+        <a href="scientific_calc.html">Scientific_Calculator</a>
+        <a href="About.html">Age_Calculator</a>
+        <a href="Contact.html">Binary_Calculator</a>
+        <a href="page.html">HCF_Calculator</a>
+        <a href="calc.html">Quadratic_Calculator</a>
+        <a href="pc.html">P&C_Calculator</a>
+        <a href="area.html">Area_Calculator</a>
+        <a href="matrix.html">Matrix_Calculator</a>
+    </div>
 </nav>
 
 <!-- ---------------------- CALCULATOR BOX ------------------------- -->
 <div class="calculator">
     <h2>LCM Calculator</h2>
 
-    <form>
-        <label for="num1">Number 1:</label>
-        <input type="number" id="num1" required>
+    <label for="num1">Number 1:</label>
+    <input type="number" id="num1" placeholder="Enter first number">
 
-        <label for="num2">Number 2:</label>
-        <input type="number" id="num2" required>
+    <label for="num2">Number 2:</label>
+    <input type="number" id="num2" placeholder="Enter second number">
 
-        <button id="calculate-btn">Calculate LCM</button>
-    </form>
+    <button onclick="calculateLCM()">Calculate LCM</button>
 
     <p id="result"></p>
 </div>
 
-<script src="script4.js"></script>
+<script>
+function toggleMenu() {
+    document.getElementById("menu").classList.toggle("active");
+}
+
+// LCM calculation function
+function calculateLCM() {
+    let n1 = parseInt(document.getElementById("num1").value);
+    let n2 = parseInt(document.getElementById("num2").value);
+
+    if(isNaN(n1) || isNaN(n2) || n1 <= 0 || n2 <= 0) {
+        alert("Please enter valid positive numbers.");
+        return;
+    }
+
+    function gcd(a, b) {
+        return b === 0 ? a : gcd(b, a % b);
+    }
+
+    let lcm = (n1 * n2) / gcd(n1, n2);
+
+    document.getElementById("result").innerText = "LCM: " + lcm;
+}
+</script>
 
 </body>
 </html>
