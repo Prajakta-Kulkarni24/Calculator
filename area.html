@@ -4,12 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Area Calculator</title>
-
 <style>
-/* ---------------------- GLOBAL ------------------------- */
-html, body {
+/* ---------------------- RESET ------------------------- */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+html, body {
+    height: 100%;
     font-family: Arial, sans-serif;
     background: #f2f2f2;
 }
@@ -70,15 +73,13 @@ html, body {
 @media (max-width: 768px) {
     .nav-links {
         position: absolute;
-        top: 56px; /* navbar height */
+        top: 56px; /* height of navbar */
         right: 0;
         width: 220px;
         display: none;
         flex-direction: column;
         background: #3b3b3b;
         border-radius: 0 0 8px 8px;
-        padding: 0;
-        margin: 0;
     }
     .nav-links a {
         padding: 12px 0;
@@ -94,7 +95,7 @@ html, body {
 
 /* ---------------------- CALCULATOR ------------------------- */
 .calculator {
-    width: 350px;
+    max-width: 350px;
     margin: 60px auto;
     padding: 20px;
     background: #e0e0e0;
@@ -112,20 +113,20 @@ html, body {
     gap: 12px;
 }
 
-/* Dynamic input container */
+/* Input container */
 #inputs {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
 
-/* Labels styling */
+/* Labels */
 label {
     font-size: 16px;
     font-weight: bold;
 }
 
-/* Input styles */
+/* Inputs */
 .calculator input,
 .calculator select {
     width: 100%;
@@ -133,7 +134,6 @@ label {
     font-size: 16px;
     border-radius: 6px;
     border: 1px solid #ccc;
-    box-sizing: border-box;
 }
 
 /* Button */
@@ -161,9 +161,9 @@ button:active {
 }
 </style>
 </head>
-
 <body>
-<!-- ---------------------- NAVBAR ------------------------- -->
+
+<!-- NAVBAR -->
 <nav class="navbar">
     <div class="logo">Area Calc</div>
     <div class="hamburger" onclick="toggleMenu()">
@@ -185,7 +185,7 @@ button:active {
     </div>
 </nav>
 
-<!-- ---------------------- CALCULATOR ------------------------- -->
+<!-- CALCULATOR -->
 <div class="calculator">
     <h2>Area Calculator</h2>
     <form id="areaForm">
@@ -196,12 +196,9 @@ button:active {
             <option value="circle">Circle</option>
             <option value="triangle">Triangle</option>
         </select>
-
         <div id="inputs"></div>
-
         <button id="calculate-btn">Calculate Area</button>
     </form>
-
     <p id="result"></p>
 </div>
 
@@ -210,7 +207,7 @@ function toggleMenu() {
     document.getElementById("menu").classList.toggle("active");
 }
 </script>
-
 <script src="script8.js"></script>
+
 </body>
 </html>
