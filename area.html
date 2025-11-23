@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -7,7 +7,7 @@
 
 <style>
 /* ---------------------- GLOBAL ------------------------- */
-body {
+html, body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
@@ -24,10 +24,9 @@ body {
     padding: 14px 20px;
     position: sticky;
     top: 0;
-   z-index: 1000;    /* make sure it stays above other elements */
-    width: 100%;      /* full width */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* optional: slight shadow */
-}
+    z-index: 1000;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 .logo {
@@ -71,13 +70,15 @@ body {
 @media (max-width: 768px) {
     .nav-links {
         position: absolute;
+        top: 56px; /* navbar height */
         right: 0;
-        top: 60px;
         width: 220px;
         display: none;
         flex-direction: column;
         background: #3b3b3b;
         border-radius: 0 0 8px 8px;
+        padding: 0;
+        margin: 0;
     }
     .nav-links a {
         padding: 12px 0;
@@ -159,14 +160,12 @@ button:active {
     font-weight: bold;
 }
 </style>
-
 </head>
-<body>
 
+<body>
 <!-- ---------------------- NAVBAR ------------------------- -->
 <nav class="navbar">
     <div class="logo">Area Calc</div>
-
     <div class="hamburger" onclick="toggleMenu()">
         <span></span>
         <span></span>
@@ -175,21 +174,20 @@ button:active {
 
     <div class="nav-links" id="menu">
         <a href="index.html">Home</a>
-        <a href="scientific_calc.html">Scientific_Calculator</a>
-        <a href="About.html">Age_Calculator</a>
-        <a href="Contact.html">Binary_Calculator</a>
-        <a href="file.html">LCM_Calculator</a>
-        <a href="page.html">HCF_Calculator</a>
-        <a href="calc.html">Quadratic_Calculator</a>
-        <a href="pc.html">P&C_Calculator</a>
-        <a href="matrix.html">Matrix_Calculator</a>
+        <a href="scientific_calc.html">Scientific Calculator</a>
+        <a href="About.html">Age Calculator</a>
+        <a href="Contact.html">Binary Calculator</a>
+        <a href="file.html">LCM Calculator</a>
+        <a href="page.html">HCF Calculator</a>
+        <a href="calc.html">Quadratic Calculator</a>
+        <a href="pc.html">P&C Calculator</a>
+        <a href="matrix.html">Matrix Calculator</a>
     </div>
 </nav>
 
 <!-- ---------------------- CALCULATOR ------------------------- -->
 <div class="calculator">
     <h2>Area Calculator</h2>
-
     <form id="areaForm">
         <label for="shape">Shape:</label>
         <select id="shape">
@@ -214,6 +212,5 @@ function toggleMenu() {
 </script>
 
 <script src="script8.js"></script>
-
 </body>
 </html>
