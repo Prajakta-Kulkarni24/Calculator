@@ -1,53 +1,221 @@
  <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scientific Calculator</title>
-    <link rel="stylesheet" href="style10.css">
- <nav>
-  <a href="index.html">home</a><br>
- <a href="About.html">age_calc</a><br>
-     <a href="Contact.html">binary_calc</a><br>  
-    <a href="file.html">lcm_calc</a><br>
-    <a href="page.html">hcf_calc</a><br>
-    <a href="calc.html">quadratic_calc</a><br>
-    <a href="pc.html">p&c_calc</a><br>
-    <a href="area.html">area_calc</a><br>
-    <a href="matrix.html">matrix_calc</a>
-</nav>
-</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scientific Calculator</title>
+<style>
+/* ---------------------- GLOBAL ------------------------- */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+}
+
+/* ---------------------- NAVBAR ------------------------- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #3b3b3b;
+    color: white;
+    padding: 14px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: 0.2s;
+}
+
+.nav-links a:hover {
+    background: #555;
+}
+
+/* Hamburger */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.hamburger span {
+    width: 28px;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+}
+
+/* Responsive Navigation */
+@media (max-width: 768px) {
+    .nav-links {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 220px;
+        flex-direction: column;
+        background: #3b3b3b;
+        padding: 10px 0;
+        display: none;
+        border-radius: 0 0 8px 8px;
+    }
+    .nav-links a {
+        display: block;
+        text-align: center;
+        padding: 10px 0;
+        margin: 0;
+        border-radius: 0;
+    }
+    .nav-links.active {
+        display: flex;
+    }
+    .hamburger {
+        display: flex;
+    }
+}
+
+/* ---------------------- CALCULATOR ------------------------- */
+.calculator {
+    width: 350px;
+    margin: 60px auto;
+    padding: 20px;
+    background: #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0px 0px 10px #0003;
+}
+
+.calculator input#display {
+    width: 100%;
+    height: 50px;
+    font-size: 22px;
+    text-align: right;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+button {
+    padding: 15px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #d3d3d3;
+    transition: 0.2s;
+}
+
+button:active {
+    transform: scale(0.95);
+    background: #b8b8b8;
+}
+
+@media (max-width: 400px) {
+    .calculator {
+        width: 90%;
+        margin: 60px auto;
+        padding: 15px;
+    }
+
+    .buttons button {
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    .calculator input#display {
+        font-size: 20px;
+        height: 45px;
+    }
+}
+</style>
 </head>
 <body>
-    <div class="calculator">
-        <input type="text" id="display" disabled>
-        <div class="buttons">
-            <button id="clear">C</button>
-            <button id="backspace">&lt;</button>
-            <button id="sin">sin</button>
-            <button id="cos">cos</button>
-            <button id="tan">tan</button>
-            <button id="log">log</button>
-            <button id="sqrt">√</button>
-            <button id="power">^</button>
-            <button id="divide">/</button>
-            <button id="multiply">*</button>
-            <button id="subtract">-</button>
-            <button id="add">+</button>
-            <button id="equals">=</button>
-            <button id="zero">0</button>
-            <button id="one">1</button>
-            <button id="two">2</button>
-            <button id="three">3</button>
-            <button id="four">4</button>
-            <button id="five">5</button>
-            <button id="six">6</button>
-            <button id="seven">7</button>
-            <button id="eight">8</button>
-            <button id="nine">9</button>
-            <button id="decimal">.</button>
-        </div>
+
+<!-- --------------------- NAVBAR --------------------------- -->
+<nav class="navbar">
+    <div class="logo">Scientific Calculator</div>
+
+    <div class="hamburger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
     </div>
-    <script src="script10.js"></script>
+
+    <div class="nav-links" id="menu">
+        <a href="index.html">home</a>
+        <a href="About.html">age_calc</a>
+        <a href="Contact.html">binary_calculator</a>
+        <a href="file.html">lcm_calculator</a>
+        <a href="page.html">hcf_calculator</a>
+        <a href="calc.html">quadratic_calculator</a>
+        <a href="pc.html">p&c_calculatot</a>
+        <a href="area.html">area_calculator</a>
+        <a href="matrix.html">matrix_calculator</a>
+    </div>
+</nav>
+
+<!-- --------------------- CALCULATOR --------------------------- -->
+<div class="calculator">
+    <input type="text" id="display" disabled>
+    <div class="buttons">
+        <button id="clear">C</button>
+        <button id="backspace">&lt;</button>
+        <button id="sin">sin</button>
+        <button id="cos">cos</button>
+        <button id="tan">tan</button>
+        <button id="log">log</button>
+        <button id="sqrt">√</button>
+        <button id="power">^</button>
+        <button id="divide">/</button>
+        <button id="multiply">*</button>
+        <button id="subtract">-</button>
+        <button id="add">+</button>
+        <button id="equals">=</button>
+        <button id="zero">0</button>
+        <button id="one">1</button>
+        <button id="two">2</button>
+        <button id="three">3</button>
+        <button id="four">4</button>
+        <button id="five">5</button>
+        <button id="six">6</button>
+        <button id="seven">7</button>
+        <button id="eight">8</button>
+        <button id="nine">9</button>
+        <button id="decimal">.</button>
+    </div>
+</div>
+
+<script>
+function toggleMenu() {
+    document.getElementById("menu").classList.toggle("active");
+}
+</script>
+<script src="script10.js"></script>
 </body>
 </html>
