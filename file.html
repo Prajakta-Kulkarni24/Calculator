@@ -1,35 +1,45 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LCM Calculator</title>
     <link rel="stylesheet" href="style4.css">
- <nav>
- <a href ="index.html">home</a><br>
-  <a href ="scientific_calc.html">scientific_calc</a><br>
- <a href ="About.html">age_calc</a><br>
- <a href ="Contact.html">binary_calc</a><br>
- <a href ="page.html">hcf_calc</a><br>
- <a href="calc.html">quadratic_calc</a><br>
- <a href="pc.html">p&c_calc</a><br>
- <a href="area.html">area_calc</a><br>
- <a href="matrix.html">matrix_calc</a>
- </nav>
 </head>
-<body>
-    <div class="calculator">
-        <h2>LCM Calculator</h2>
-        <form>
-            <label for="num1">Number 1:</label>
-            <input type="number" id="num1" required>
-            <label for="num2">Number 2:</label>
-            <input type="number" id="num2" required>
-            <button id="calculate-btn">Calculate LCM</button>
-        </form>
-        <p id="result"></p>
-    </div>
 
-    <script src="script4.js"></script>
+<body>
+
+<!-- ---------------------- NAVBAR ------------------------- -->
+<nav class="navbar">
+    <a href="index.html">Home</a>
+    <a href="scientific_calc.html">Scientific_Calculator</a>
+    <a href="About.html">Age_Calculator</a>
+    <a href="Contact.html">Binary_Calculator</a>
+    <a href="page.html">HCF_Calculator</a>
+    <a href="calc.html">Quadratic_Calculator</a>
+    <a href="pc.html">P&C_Calculator</a>
+    <a href="area.html">Area_Calculator</a>
+    <a href="matrix.html">Matrix_Calculator</a>
+</nav>
+
+<!-- ---------------------- CALCULATOR BOX ------------------------- -->
+<div class="calculator">
+    <h2>LCM Calculator</h2>
+
+    <form>
+        <label for="num1">Number 1:</label>
+        <input type="number" id="num1" required>
+
+        <label for="num2">Number 2:</label>
+        <input type="number" id="num2" required>
+
+        <button id="calculate-btn">Calculate LCM</button>
+    </form>
+
+    <p id="result"></p>
+</div>
+
+<script src="script4.js"></script>
+
 </body>
 </html>
