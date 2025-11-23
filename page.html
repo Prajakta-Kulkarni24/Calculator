@@ -1,35 +1,229 @@
  <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HCF Calculator</title>
-    <link rel="stylesheet" href="style5.css">
- <nav>
-<a href ="index.html">home</a><br>
- <a href ="scientific_calc.html">scientific_calc</a><br>
-  <a href ="About.html">age_calc</a><br>
-<a href ="Contact.html">binary_calc</a><br>
-  <a href ="file.html">lcm_calc</a><br>
- <a href="calc.html">quadratic_calc</a><br>
- <a href="pc.html">p&c_calc</a><br>
- <a href="area.html">area_calc</a><br>
- <a href="matrix.html">matrix_calc</a>
- </nav>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HCF Calculator</title>
+<style>
+/* ---------------------- GLOBAL ------------------------- */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+}
+
+/* ---------------------- NAVBAR ------------------------- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #3b3b3b;
+    color: white;
+    padding: 14px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: 0.2s;
+}
+
+.nav-links a:hover {
+    background: #555;
+}
+
+/* Hamburger */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.hamburger span {
+    width: 28px;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+}
+
+/* Responsive Navigation */
+@media (max-width: 768px) {
+    .nav-links {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 220px;
+        flex-direction: column;
+        background: #3b3b3b;
+        padding: 10px 0;
+        display: none;
+        border-radius: 0 0 8px 8px;
+    }
+    .nav-links a {
+        display: block;
+        text-align: center;
+        padding: 10px 0;
+        margin: 0;
+        border-radius: 0;
+    }
+    .nav-links.active {
+        display: flex;
+    }
+    .hamburger {
+        display: flex;
+    }
+}
+
+/* ---------------------- HCF CALCULATOR ------------------------- */
+.calculator {
+    width: 350px;
+    margin: 60px auto;
+    padding: 20px;
+    background: #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0px 0px 10px #0003;
+}
+
+.calculator h2 {
+    text-align: center;
+}
+
+.calculator form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.calculator input[type="number"] {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+button {
+    padding: 12px;
+    font-size: 18px;
+    background: #4a4a4a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:active {
+    transform: scale(0.95);
+    background: #333;
+}
+
+#result {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+@media (max-width: 400px) {
+    .calculator {
+        width: 90%;
+        margin: 60px auto;
+        padding: 15px;
+    }
+
+    button {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    .calculator input[type="number"] {
+        font-size: 16px;
+        padding: 8px;
+    }
+}
+</style>
 </head>
 <body>
-    <div class="calculator">
-        <h2>HCF Calculator</h2>
-        <form>
-            <label for="num1">Number 1:</label>
-            <input type="number" id="num1" required>
-            <label for="num2">Number 2:</label>
-            <input type="number" id="num2" required>
-            <button id="calculate-btn">Calculate HCF</button>
-        </form>
-        <p id="result"></p>
+
+<!-- --------------------- NAVBAR --------------------------- -->
+<nav class="navbar">
+    <div class="logo">HCF Calculator</div>
+
+    <div class="hamburger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
     </div>
 
-    <script src="script5.js"></script>
+    <div class="nav-links" id="menu">
+        <a href="index.html">Home</a>
+        <a href="scientific_calc.html">Scientific_Calculator</a>
+        <a href="About.html">Age_Calculator</a>
+        <a href="Contact.html">Binary_Calculator</a>
+        <a href="file.html">LCM_Calculator</a>
+        <a href="calc.html">Quadratic_Calculator</a>
+        <a href="pc.html">P&C_Calculator</a>
+        <a href="area.html">Area_Calculator</a>
+        <a href="matrix.html">Matrix_Calculator</a>
+    </div>
+</nav>
+
+<!-- --------------------- HCF CALCULATOR --------------------------- -->
+<div class="calculator">
+    <h2>HCF Calculator</h2>
+    <form id="hcfForm">
+        <label for="num1">Number 1:</label>
+        <input type="number" id="num1" required>
+        <label for="num2">Number 2:</label>
+        <input type="number" id="num2" required>
+        <button type="submit" id="calculate-btn">Calculate HCF</button>
+    </form>
+    <p id="result"></p>
+</div>
+
+<script>
+function toggleMenu() {
+    document.getElementById("menu").classList.toggle("active");
+}
+
+// Example HCF function
+document.getElementById("hcfForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    let a = parseInt(document.getElementById("num1").value);
+    let b = parseInt(document.getElementById("num2").value);
+    
+    function hcf(x, y){
+        while(y) {
+            let t = y;
+            y = x % y;
+            x = t;
+        }
+        return x;
+    }
+
+    document.getElementById("result").innerText = "HCF: " + hcf(a,b);
+});
+</script>
+
 </body>
 </html>
