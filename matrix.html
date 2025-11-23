@@ -1,42 +1,315 @@
  <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matrix Calculator</title>
-    <link rel="stylesheet" href="style9.css">
-    <nav>
-  <a href="index.html">home</a><br>
-   <a href="scientific_calc.html">scientific_calc</a><br>
-  <a href="About.html">age_calc</a><br>
-  <a href="Contact.html">binary_calc</a><br>
-  <a href="file.html">lcm_calc</a><br>
-  <a href="page.html">hcf_calc</a><br>
-  <a href="calc.html">quadratic_calc</a><br>
-  <a href="pc.html">p&c_calc</a><br>
-  <a href="area.html">area_calc</a>
- </nav>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matrix Calculator</title>
+
+<style>
+/* ---------------------- GLOBAL ------------------------- */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+}
+
+/* ---------------------- NAVBAR ------------------------- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #3b3b3b;
+    color: white;
+    padding: 14px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: 0.2s;
+}
+
+.nav-links a:hover {
+    background: #555;
+}
+
+/* Hamburger */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 28px;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+}
+
+/* Responsive Navigation */
+@media (max-width: 768px) {
+    .nav-links {
+        position: absolute;
+        right: 0;
+        top: 60px;
+        width: 220px;
+        display: none;
+        flex-direction: column;
+        background: #3b3b3b;
+        border-radius: 0 0 8px 8px;
+    }
+    .nav-links a {
+        padding: 12px 0;
+        text-align: center;
+    }
+    .nav-links.active {
+        display: flex;
+    }
+    .hamburger {
+        display: flex;
+    }
+}
+
+/* ---------------------- CALCULATOR ------------------------- */
+.calculator {
+    width: 90%;
+    max-width: 500px;
+    margin: 60px auto;
+    padding: 25px;
+    background: #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 0 15px #0003;
+}
+
+.calculator h2, .calculator h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Form styling */
+.calculator form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+label {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+input, select, button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+button {
+    background: #404040;
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:active {
+    background: #333;
+    transform: scale(0.95);
+}
+
+#matrix1-inputs, #matrix2-inputs {
+    display: grid;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+#result {
+    margin-top: 15px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    word-break: break-word;
+}
+</style>
 </head>
 <body>
-    <div class="calculator">
-        <h1>Matrix Calculator</h1>
-        <form>
-            <label for="rows">Rows:</label>
-            <input type="number" id="rows" required>
-            <label for="cols">Columns:</label>
-            <input type="number" id="cols" required>
-            <button id="create-matrix-btn">Create Matrices</button>
-            <div id="matrix1-inputs"></div>
-            <div id="matrix2-inputs"></div>
-            <select id="operation">
-                <option value="add">Add</option>
-                <option value="subtract">Subtract</option>
-                <option value="multiply">Multiply</option>
-            </select>
-            <button id="calculate-btn">Calculate</button>
-            <div id="result"></div>
-        </form>
+
+<!-- ---------------------- NAVBAR ------------------------- -->
+<nav class="navbar">
+    <div class="logo">Matrix Calc</div>
+
+    <div class="hamburger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
     </div>
-    <script src="script9.js"></script>
+
+    <div class="nav-links" id="menu">
+        <a href="index.html">Home</a>
+        <a href="scientific_calc.html">Scientific_Calculator</a>
+        <a href="About.html">Age_Calculator</a>
+        <a href="Contact.html">Binary_Calculator</a>
+        <a href="file.html">LCM_Calculator</a>
+        <a href="page.html">HCF_Calculator</a>
+        <a href="calc.html">Quadratic_Calculator</a>
+        <a href="pc.html">P&C_Calculator</a>
+        <a href="area.html">Area_Calculator</a>
+    </div>
+</nav>
+
+<!-- ---------------------- CALCULATOR ------------------------- -->
+<div class="calculator">
+    <h1>Matrix Calculator</h1>
+
+    <form id="matrixForm">
+        <label for="rows">Rows:</label>
+        <input type="number" id="rows" min="1" placeholder="Enter number of rows" required>
+
+        <label for="cols">Columns:</label>
+        <input type="number" id="cols" min="1" placeholder="Enter number of columns" required>
+
+        <button type="button" id="create-matrix-btn">Create Matrices</button>
+
+        <div id="matrix1-inputs"></div>
+        <div id="matrix2-inputs"></div>
+
+        <label for="operation">Operation:</label>
+        <select id="operation">
+            <option value="add">Add</option>
+            <option value="subtract">Subtract</option>
+            <option value="multiply">Multiply</option>
+        </select>
+
+        <button type="button" id="calculate-btn">Calculate</button>
+    </form>
+
+    <div id="result"></div>
+</div>
+
+<script>
+function toggleMenu() {
+    document.getElementById("menu").classList.toggle("active");
+}
+
+// Create matrix input fields dynamically
+document.getElementById("create-matrix-btn").addEventListener("click", function(e){
+    e.preventDefault();
+    let rows = parseInt(document.getElementById("rows").value);
+    let cols = parseInt(document.getElementById("cols").value);
+    let matrix1 = document.getElementById("matrix1-inputs");
+    let matrix2 = document.getElementById("matrix2-inputs");
+    matrix1.innerHTML = "";
+    matrix2.innerHTML = "";
+
+    if(isNaN(rows) || isNaN(cols) || rows < 1 || cols < 1){
+        alert("Enter valid rows and columns!");
+        return;
+    }
+
+    matrix1.innerHTML = "<h3>Matrix 1:</h3>";
+    matrix2.innerHTML = "<h3>Matrix 2:</h3>";
+
+    for(let i=0; i<rows; i++){
+        for(let j=0; j<cols; j++){
+            let input1 = document.createElement("input");
+            input1.type = "number";
+            input1.placeholder = `r${i+1}c${j+1}`;
+            input1.id = `m1-${i}-${j}`;
+            matrix1.appendChild(input1);
+
+            let input2 = document.createElement("input");
+            input2.type = "number";
+            input2.placeholder = `r${i+1}c${j+1}`;
+            input2.id = `m2-${i}-${j}`;
+            matrix2.appendChild(input2);
+        }
+    }
+});
+
+// Matrix operations
+document.getElementById("calculate-btn").addEventListener("click", function(e){
+    e.preventDefault();
+    let rows = parseInt(document.getElementById("rows").value);
+    let cols = parseInt(document.getElementById("cols").value);
+    let op = document.getElementById("operation").value;
+    let resultDiv = document.getElementById("result");
+    let matrix1 = [], matrix2 = [], result = [];
+
+    // read matrices
+    for(let i=0; i<rows; i++){
+        let row1 = [], row2 = [], rowRes = [];
+        for(let j=0; j<cols; j++){
+            let val1 = parseFloat(document.getElementById(`m1-${i}-${j}`).value) || 0;
+            let val2 = parseFloat(document.getElementById(`m2-${i}-${j}`).value) || 0;
+            row1.push(val1);
+            row2.push(val2);
+            rowRes.push(0);
+        }
+        matrix1.push(row1);
+        matrix2.push(row2);
+        result.push(rowRes);
+    }
+
+    // calculate
+    if(op === "add"){
+        for(let i=0;i<rows;i++)
+            for(let j=0;j<cols;j++)
+                result[i][j] = matrix1[i][j] + matrix2[i][j];
+    } else if(op === "subtract"){
+        for(let i=0;i<rows;i++)
+            for(let j=0;j<cols;j++)
+                result[i][j] = matrix1[i][j] - matrix2[i][j];
+    } else if(op === "multiply"){
+        // simple multiplication assuming square matrices
+        if(rows !== cols){
+            resultDiv.innerText = "Multiplication requires square matrices!";
+            return;
+        }
+        for(let i=0;i<rows;i++){
+            for(let j=0;j<cols;j++){
+                let sum = 0;
+                for(let k=0;k<cols;k++){
+                    sum += matrix1[i][k] * matrix2[k][j];
+                }
+                result[i][j] = sum;
+            }
+        }
+    }
+
+    // show result
+    let resHTML = "<h3>Result:</h3>";
+    resHTML += "<table border='1' style='margin:auto; border-collapse: collapse;'>";
+    for(let i=0;i<rows;i++){
+        resHTML += "<tr>";
+        for(let j=0;j<cols;j++){
+            resHTML += `<td style='padding:5px 10px;'>${result[i][j]}</td>`;
+        }
+        resHTML += "</tr>";
+    }
+    resHTML += "</table>";
+    resultDiv.innerHTML = resHTML;
+});
+</script>
+
 </body>
 </html>
