@@ -1,39 +1,199 @@
  <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Area Calculator</title>
-    <link rel="stylesheet" href="style8.css">
- <nav>
-<a href="index.html">home</a><br>
- <a href="scientific_calc.html">scientific_calc</a><br>
-  <a href="About.html">age_calc</a><br>
-  <a href="Contact.html">binary_calc</a><br>
-<a href="file.html">lcm_calc</a><br>
-  <a href="page.html">hcf_calc</a><br>
-  <a href="calc.html">quadratic_calc</a><br>
-<a href="pc.html">p&c_calc</a><br>
-  <a href="matrix.html">matrix_calc</a>
- </nav>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Area Calculator</title>
+
+<style>
+/* ---------------------- GLOBAL ------------------------- */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+}
+
+/* ---------------------- NAVBAR ------------------------- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #3b3b3b;
+    color: white;
+    padding: 14px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: 0.2s;
+}
+
+.nav-links a:hover {
+    background: #555;
+}
+
+/* Hamburger */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 28px;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+}
+
+/* Responsive Navigation */
+@media (max-width: 768px) {
+    .nav-links {
+        position: absolute;
+        right: 0;
+        top: 60px;
+        width: 220px;
+        display: none;
+        flex-direction: column;
+        background: #3b3b3b;
+        border-radius: 0 0 8px 8px;
+    }
+    .nav-links a {
+        padding: 12px 0;
+        text-align: center;
+    }
+    .nav-links.active {
+        display: flex;
+    }
+    .hamburger {
+        display: flex;
+    }
+}
+
+/* ---------------------- CALCULATOR ------------------------- */
+.calculator {
+    width: 350px;
+    margin: 60px auto;
+    padding: 20px;
+    background: #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0px 0px 10px #0003;
+}
+
+.calculator h2 {
+    text-align: center;
+}
+
+.calculator form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.calculator input,
+.calculator select {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+button {
+    padding: 12px;
+    font-size: 18px;
+    background: #4a4a4a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button:active {
+    background: #333;
+    transform: scale(0.95);
+}
+
+#result {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 20px;
+    font-weight: bold;
+}
+</style>
+
 </head>
 <body>
-    <div class="calculator">
-        <h2>Area Calculator</h2>
-        <form>
-            <label for="shape">Shape:</label>
-            <select id="shape">
-                <option value="rectangle">Rectangle</option>
-                <option value="square">Square</option>
-                <option value="circle">Circle</option>
-                <option value="triangle">Triangle</option>
-            </select>
-            <div id="inputs"></div>
-            <button id="calculate-btn">Calculate Area</button>
-        </form>
-        <p id="result"></p>
+
+<!-- ---------------------- NAVBAR ------------------------- -->
+<nav class="navbar">
+    <div class="logo">Area Calc</div>
+
+    <div class="hamburger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
     </div>
 
-    <script src="script8.js"></script>
+    <div class="nav-links" id="menu">
+        <a href="index.html">home</a>
+        <a href="scientific_calc.html">scientific_calc</a>
+        <a href="About.html">age_calc</a>
+        <a href="Contact.html">binary_calc</a>
+        <a href="file.html">lcm_calc</a>
+        <a href="page.html">hcf_calc</a>
+        <a href="calc.html">quadratic_calc</a>
+        <a href="pc.html">p&c_calc</a>
+        <a href="matrix.html">matrix_calc</a>
+    </div>
+</nav>
+
+<!-- ---------------------- CALCULATOR ------------------------- -->
+<div class="calculator">
+    <h2>Area Calculator</h2>
+
+    <form id="areaForm">
+        <label for="shape">Shape:</label>
+        <select id="shape">
+            <option value="rectangle">Rectangle</option>
+            <option value="square">Square</option>
+            <option value="circle">Circle</option>
+            <option value="triangle">Triangle</option>
+        </select>
+
+        <div id="inputs"></div>
+
+        <button id="calculate-btn">Calculate Area</button>
+    </form>
+
+    <p id="result"></p>
+</div>
+
+<script>
+function toggleMenu() {
+    document.getElementById("menu").classList.toggle("active");
+}
+</script>
+
+<script src="script8.js"></script>
+
 </body>
 </html>
