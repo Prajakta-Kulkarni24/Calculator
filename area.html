@@ -108,8 +108,23 @@ body {
     gap: 12px;
 }
 
+/* Dynamic input container */
+#inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Labels styling */
+label {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Input styles */
 .calculator input,
 .calculator select {
+    width: 100%;
     padding: 10px;
     font-size: 16px;
     border-radius: 6px;
@@ -117,6 +132,7 @@ body {
     box-sizing: border-box;
 }
 
+/* Button */
 button {
     padding: 12px;
     font-size: 18px;
@@ -132,6 +148,7 @@ button:active {
     transform: scale(0.95);
 }
 
+/* Result */
 #result {
     text-align: center;
     margin-top: 15px;
