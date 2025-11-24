@@ -6,22 +6,17 @@
 <title>Quadratic Formula Calculator</title>
 
 <style>
-/* ---------------------- GLOBAL FIX ------------------------- */
+/* ---------------------- RESET ------------------------- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
-/* IMPORTANT FIX — removes the white space on all mobiles */
-
-
 html, body {
-    margin: 0;
-    padding-top: 60;
     height: 100%;
-    font-family: Arial, sans-serif;
     background: #f2f2f2;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
 }
 
 /* ---------------------- NAVBAR ------------------------- */
@@ -34,7 +29,7 @@ html, body {
     padding: 14px 20px;
     position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: 1000;
 }
 
 .logo {
@@ -42,29 +37,11 @@ html, body {
     font-weight: bold;
 }
 
-.nav-links {
-    display: flex;
-    gap: 15px;
-}
-
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    padding: 8px 12px;
-    border-radius: 5px;
-    transition: 0.2s;
-}
-
-.nav-links a:hover {
-    background: #555;
-}
-
-/* Hamburger */
 .hamburger {
     display: none;
     flex-direction: column;
-    cursor: pointer;
     gap: 5px;
+    cursor: pointer;
 }
 
 .hamburger span {
@@ -74,29 +51,39 @@ html, body {
     border-radius: 2px;
 }
 
-/* Responsive Navigation */
+/* ---------------------- DROPDOWN MENU (outside navbar) ------------------------- */
+.nav-links {
+    position: absolute;
+    top: 56px;
+    right: 0;
+    width: 220px;
+    background: #3b3b3b;
+    display: none;
+    flex-direction: column;
+    padding: 10px 0;
+    border-radius: 0 0 8px 8px;
+    z-index: 999;
+}
+
+.nav-links a {
+    color: white;
+    padding: 12px 0;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    transition: 0.2s;
+}
+
+.nav-links a:hover {
+    background: #555;
+}
+
+.nav-links.active {
+    display: flex;
+}
+
+/* ---------------------- RESPONSIVE ------------------------- */
 @media (max-width: 768px) {
-    .nav-links {
-        position: absolute;
-        top: 60px;
-        right: 0;
-        width: 220px;
-        flex-direction: column;
-        background: #3b3b3b;
-        padding: 10px 0;
-        display: none;
-        border-radius: 0 0 8px 8px;
-    }
-
-    .nav-links.active {
-        display: flex;
-    }
-
-    .nav-links a {
-        text-align: center;
-        padding: 10px 0;
-    }
-
     .hamburger {
         display: flex;
     }
@@ -105,7 +92,7 @@ html, body {
 /* ---------------------- CALCULATOR ------------------------- */
 .calculator {
     width: 350px;
-    margin: 60px auto;
+    margin: 80px auto;
     padding: 20px;
     background: #e0e0e0;
     border-radius: 12px;
@@ -130,12 +117,12 @@ html, body {
 }
 
 button {
-    margin-top: 10px;
     padding: 12px;
     font-size: 18px;
     background: #4a4a4a;
     color: white;
     border: none;
+    margin-top: 10px;
     border-radius: 8px;
     cursor: pointer;
 }
@@ -165,19 +152,20 @@ button:active {
         <span></span>
         <span></span>
     </div>
-
-    <div class="nav-links" id="menu">
-        <a href="index.html">Home</a>
-        <a href="scientific_calc.html">Scientific_Calculator</a>
-        <a href="About.html">Age_Calculator</a>
-        <a href="Contact.html">Binary_Calculator</a>
-        <a href="file.html">LCM_Calculator</a>
-        <a href="page.html">HCF_Calculator</a>
-        <a href="pc.html">P&C_Calculator</a>
-        <a href="area.html">Area_Calculator</a>
-        <a href="matrix.html">Matrix_Calculator</a>
-    </div>
 </nav>
+
+<!-- ------------- DROPDOWN MENU (moved OUTSIDE navbar) ------------- -->
+<div class="nav-links" id="menu">
+    <a href="index.html">Home</a>
+    <a href="scientific_calc.html">Scientific_Calculator</a>
+    <a href="About.html">Age_Calculator</a>
+    <a href="Contact.html">Binary_Calculator</a>
+    <a href="file.html">LCM_Calculator</a>
+    <a href="page.html">HCF_Calculator</a>
+    <a href="pc.html">P&C_Calculator</a>
+    <a href="area.html">Area_Calculator</a>
+    <a href="matrix.html">Matrix_Calculator</a>
+</div>
 
 <!-- ---------------------- CALCULATOR ------------------------- -->
 <div class="calculator">
