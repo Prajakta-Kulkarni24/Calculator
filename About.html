@@ -156,6 +156,15 @@ button:active {
         padding: 10px;
     }
 }
+.footer {
+    background: #3b3b3b;
+    color: white;
+    text-align: center;
+    padding: 12px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
 </style>
 </head>
 <body>
@@ -199,7 +208,9 @@ button:active {
     <button type="button" onclick="getDOB()">Calculate</button>
     <div id="currentAge"></div>
 </div>
-
+<footer class="footer">
+    ©2025 Calculator
+</footer>
 <script>
 function toggleMenu() {
     document.getElementById("menu").classList.toggle("active");
